@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@tanstack/react-query": "^5.101.0",
+    "framer-motion": "^12.40.0",
+    "react-router-dom": "^7.17.0",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.3"
+  }
+}

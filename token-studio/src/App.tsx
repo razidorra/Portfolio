@@ -1,10 +1,73 @@
-import { useEffect, type CSSProperties } from "react";
-import { useTokenStore } from "./store/tokenStore";
-import { applyTokensToDOM } from "./lib/applyTokens";
-import Button from "./components/ui/Button";
-import Badge from "./components/ui/Badge";
+import {
+  useEffect,
+  useState,
+  type CSSProperties,
+  type MouseEvent,
+} from "react";
+import { Code2, Link, Mail } from "lucide-react";
 import ColorPicker from "./components/editor/ColorPicker";
+import { applyTokensToDOM } from "./lib/applyTokens";
+import { useTokenStore } from "./store/tokenStore";
 import "./App.css";
+
+const skills = [
+  "HTML",
+  "Tailwind CSS",
+  "JavaScript",
+  "Git",
+  "GitHub",
+  "Node.js",
+  "MongoDB",
+  "SQL",
+];
+
+interface Project {
+  title: string;
+  stack: string;
+  category: string;
+  text: string;
+  image?: string;
+  liveUrl?: string;
+  githubUrl?: string;
+}
+
+const projects: Project[] = [
+  {
+    title: "Lifestyle Quiz",
+    stack: "HTML, CSS, JavaScript",
+    category: "frontend",
+    text: "A fun frontend quiz that introduces users to a lifestyle theme, starts from a welcoming landing page, and uses simple HTML, CSS, and JavaScript interactions.",
+    image: "/lifestyle-quiz-home.png",
+    liveUrl: "https://razidorra.github.io/lifestyleQuiz/",
+    githubUrl: "https://github.com/razidorra/lifestyleQuiz",
+  },
+  {
+    title: "Responsive Portfolio",
+    stack: "React, CSS, UI Design",
+    category: "frontend",
+    text: "A clean personal site with smooth sections, reusable components, and a sharp first impression.",
+  },
+  {
+    title: "Design Token Studio",
+    stack: "React, Zustand, TypeScript",
+    category: "design system",
+    text: "A live editor for color, spacing, and typography tokens with instant component previews.",
+  },
+  {
+    title: "Full Stack Practice App",
+    stack: "Node.js, MongoDB, SQL",
+    category: "full stack",
+    text: "A learning project focused on practical data flows, clear interfaces, and maintainable code.",
+  },
+  {
+    title: "Dashboard Cards",
+    stack: "React, Responsive CSS",
+    category: "frontend",
+    text: "Compact interface cards for scanning status, comparing metrics, and keeping actions close.",
+  },
+];
+
+const projectFilters = ["all", "frontend", "design system", "full stack"];
 
 const heroBoxes = [
   {
@@ -33,65 +96,341 @@ const heroBoxes = [
   },
 ];
 
-const projectCards = [
+const stats = [
+  { value: "Frontend", label: "Responsive interfaces" },
+  { value: "Full Stack", label: "Node.js and data basics" },
+  { value: "Clean UI", label: "Readable, practical layouts" },
+];
+
+const strengths = [
   {
-    title: "Token Studio",
-    type: "React + Zustand",
-    text: "Live design tokens, reusable UI components and instant preview updates.",
-    accent: "var(--color-primary)",
+    title: "Responsive Development",
+    text: "I build layouts that stay clear on desktop, tablet, and mobile without losing the feeling of the design.",
   },
   {
-    title: "Portfolio System",
-    type: "Frontend UI",
-    text: "A responsive portfolio layout with animated cards and clean sections.",
-    accent: "var(--color-secondary)",
+    title: "Readable Code",
+    text: "I like small components, consistent naming, and structure that makes future changes easier.",
   },
   {
-    title: "Motion Experiments",
-    type: "CSS Animation",
-    text: "Hover interactions, 3D transforms and playful micro-interactions.",
-    accent: "var(--color-danger)",
+    title: "Practical Design Sense",
+    text: "I focus on spacing, hierarchy, contrast, and simple interactions that help people use the page.",
   },
 ];
 
-const skills = [
-  { name: "React", value: 88, color: "var(--color-primary)" },
-  { name: "CSS Motion", value: 82, color: "var(--color-secondary)" },
-  { name: "UI Design", value: 76, color: "var(--color-warning)" },
-  { name: "TypeScript", value: 70, color: "var(--color-danger)" },
+const processSteps = [
+  {
+    title: "Understand",
+    text: "I start with the goal, content, and user path before choosing the layout.",
+  },
+  {
+    title: "Structure",
+    text: "I turn the page into reusable sections with clear typography and spacing.",
+  },
+  {
+    title: "Refine",
+    text: "I check responsiveness, details, links, and final polish before sharing.",
+  },
 ];
 
-const processSteps = ["Research", "Design", "Build", "Polish"];
+const coreSkills = [
+  "Frontend Development",
+  "Node.js",
+  "Responsive Design",
+  "Team Collaboration",
+];
+
+const contactLinks = [
+  {
+    label: "dorra.razi@gmail.com",
+    href: "mailto:dorra.razi@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "linkedin.com/in/Razidorra",
+    href: "https://linkedin.com/in/Razidorra",
+    icon: Link,
+  },
+  {
+    label: "github.com/razidorra",
+    href: "https://github.com/razidorra",
+    icon: Code2,
+  },
+];
+
+const routes = ["/", "/learners", "/projects"] as const;
+type Route = (typeof routes)[number];
+
+function getRoute(): Route {
+  const path = window.location.pathname;
+  return routes.includes(path as Route) ? (path as Route) : "/";
+}
 
 export default function App() {
+  const [route, setRoute] = useState<Route>(getRoute);
+
+  useEffect(() => {
+    const handlePopState = () => setRoute(getRoute());
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const navigate = (path: Route) => {
+    window.history.pushState({}, "", path);
+    setRoute(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNavigate =
+    (path: Route) => (event: MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+      navigate(path);
+    };
+
+  return (
+    <div className="site-shell">
+      <header className="site-header">
+        <a
+          className="brand"
+          href="/"
+          onClick={handleNavigate("/")}
+          aria-label="Razieh.dev home"
+        >
+          RAZIEH.DEV
+        </a>
+
+        <nav className="main-nav" aria-label="Main navigation">
+          <a
+            className={route === "/" ? "active" : undefined}
+            href="/"
+            onClick={handleNavigate("/")}
+          >
+            Home
+          </a>
+          <a
+            className={route === "/learners" ? "active" : undefined}
+            href="/learners"
+            onClick={handleNavigate("/learners")}
+          >
+            Learners
+          </a>
+          <a
+            className={route === "/projects" ? "active" : undefined}
+            href="/projects"
+            onClick={handleNavigate("/projects")}
+          >
+            Projects
+          </a>
+        </nav>
+      </header>
+
+      <main>
+        {route === "/" && <HomePage onNavigate={navigate} />}
+        {route === "/learners" && <LearnersPage />}
+        {route === "/projects" && <ProjectsPage />}
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+interface PageProps {
+  onNavigate: (path: Route) => void;
+}
+
+function HomePage({ onNavigate }: PageProps) {
+  const featuredProjects = projects.slice(0, 3);
+
+  return (
+    <>
+      <section className="hero" id="home">
+        <div className="hero-copy">
+          <p className="eyebrow">About Me</p>
+          <h1>
+            Frontend developer building clean, useful web experiences.
+          </h1>
+          <p className="hero-text">
+            Hi, I am Razieh Dorrazaei. I create responsive websites and web
+            applications with React, JavaScript, CSS, and a growing full-stack
+            toolkit. My focus is simple: clear structure, smooth usability, and
+            code that is easy to continue working with.
+          </p>
+
+          <div className="hero-actions" aria-label="Primary actions">
+            <a
+              className="button button--primary"
+              href="/projects"
+              onClick={(event) => {
+                event.preventDefault();
+                onNavigate("/projects");
+              }}
+            >
+              View Projects
+            </a>
+            <a
+              className="button button--secondary"
+              href="#connect"
+            >
+              Contact Me
+            </a>
+          </div>
+        </div>
+
+        <aside className="about-card" aria-label="About Razieh">
+          <p className="card-title">Profile</p>
+          <h2>Razieh Dorrazaei</h2>
+          <p>
+            I enjoy turning ideas into polished interfaces, learning by
+            building, and improving the small details that make a page feel
+            professional.
+          </p>
+
+          <div className="skill-list" aria-label="Technical skills">
+            {skills.map((skill) => (
+              <span key={skill}>{skill}</span>
+            ))}
+          </div>
+
+          <a
+            className="button button--primary button--wide"
+            href="/updated-CV.pdf"
+            download="Razieh-Dorrazaei-CV.pdf"
+          >
+            Download Resume
+          </a>
+        </aside>
+      </section>
+
+      <section className="stats-strip" aria-label="Portfolio highlights">
+        {stats.map((item) => (
+          <div key={item.label}>
+            <strong>{item.value}</strong>
+            <span>{item.label}</span>
+          </div>
+        ))}
+      </section>
+
+      <section className="about-section" aria-label="About Razieh's work">
+        <div className="about-section__copy">
+          <p className="eyebrow">What I Bring</p>
+          <h2>Balanced frontend work with an eye for structure.</h2>
+          <p>
+            I am developing my skills across modern frontend tools and backend
+            fundamentals, with a strong interest in pages that are practical,
+            accessible, and visually calm. I care about making the content easy
+            to scan and the interface easy to trust.
+          </p>
+        </div>
+
+        <div className="strength-grid">
+          {strengths.map((strength) => (
+            <article className="strength-card" key={strength.title}>
+              <h3>{strength.title}</h3>
+              <p>{strength.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="process-section" aria-label="Development process">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Process</p>
+            <h2>How I move from idea to finished page.</h2>
+          </div>
+        </div>
+
+        <div className="process-cards">
+          {processSteps.map((step, index) => (
+            <article className="process-card" key={step.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-projects" aria-label="Selected projects preview">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Selected Work</p>
+            <h2>Projects that show the material I work with.</h2>
+          </div>
+          <a
+            className="button button--secondary"
+            href="/projects"
+            onClick={(event) => {
+              event.preventDefault();
+              onNavigate("/projects");
+            }}
+          >
+            All Projects
+          </a>
+        </div>
+
+        <div className="project-grid">
+          {featuredProjects.map((project) => (
+            <ProjectCard project={project} key={project.title} />
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+
+function LearnersPage() {
+  return (
+    <section className="page-section learners-page">
+      <div className="page-heading">
+        <p className="eyebrow">Learning Work</p>
+        <h1>Practice projects and experiments.</h1>
+        <p>
+          This page keeps the previous learning material together: project
+          cards, token controls, motion boxes, and the same color palette and
+          box structure from the earlier design.
+        </p>
+      </div>
+
+      <div className="project-grid learners-projects">
+        {projects.map((project) => (
+          <ProjectCard project={project} key={project.title} />
+        ))}
+      </div>
+
+      <TokenStudioPanel />
+    </section>
+  );
+}
+
+function TokenStudioPanel() {
   const colors = useTokenStore((s) => s.colors);
   const spacing = useTokenStore((s) => s.spacing);
   const typography = useTokenStore((s) => s.typography);
   const updateColor = useTokenStore((s) => s.updateColor);
   const updateSpacing = useTokenStore((s) => s.updateSpacing);
   const updateTypography = useTokenStore((s) => s.updateTypography);
-  const primaryColor =
-    colors.find((color) => color.name === "primary")?.value ?? "#1D9E75";
 
   useEffect(() => {
     applyTokensToDOM(colors, spacing, typography);
   }, [colors, spacing, typography]);
 
   return (
-    <div className="app-shell">
-      <aside className="sidebar">
-        <h2 className="sidebar-title">Token Studio</h2>
-        <p className="section-label">Farb-Tokens</p>
-        {colors.map((c) => (
+    <section className="token-studio" aria-label="Interactive token studio">
+      <aside className="token-sidebar">
+        <h2>Token Studio</h2>
+
+        <p className="token-label">Farb-Tokens</p>
+        {colors.map((color) => (
           <ColorPicker
-            key={c.name}
-            name={c.name}
-            value={c.value}
+            key={color.name}
+            name={color.name}
+            value={color.value}
             onChange={updateColor}
           />
         ))}
 
-        <p className="section-label section-label--spaced">Spacing</p>
+        <p className="token-label token-label--spaced">Spacing</p>
         {spacing.map((token) => (
           <label className="token-field" key={token.name}>
             <span>{token.name}</span>
@@ -105,7 +444,7 @@ export default function App() {
           </label>
         ))}
 
-        <p className="section-label section-label--spaced">Typography</p>
+        <p className="token-label token-label--spaced">Typography</p>
         {typography.map((token) => (
           <div className="typography-group" key={token.name}>
             <span className="typography-group__title">{token.name}</span>
@@ -155,159 +494,175 @@ export default function App() {
         ))}
       </aside>
 
-      <main className="preview">
-        <header className="preview-header">
-          <h1>Komponenten Preview</h1>
-          <p>Ändere die Farben links - alles updated live.</p>
-        </header>
+      <div className="token-preview">
+        <div className="token-preview__copy">
+          <p className="eyebrow">Interactive Tokens</p>
+          <h2>Live design system preview</h2>
+          <p>
+            Change the color, spacing, and typography values. The preview boxes
+            react live, just like in the first version of the app.
+          </p>
+        </div>
 
-        <section className="hero-stage" aria-label="Animated hero preview">
-          <div className="hero-copy">
-            <p className="section-label">Interactive Hero</p>
-            <h2>Frontend Portfolio Lab</h2>
+        <div className="hero-box-grid">
+          {heroBoxes.map((box, index) => (
+            <button
+              className={`hero-box hero-box--${box.id}`}
+              key={box.id}
+              style={
+                {
+                  "--box-tone": box.tone,
+                  "--float-delay": `${index * -0.7}s`,
+                } as CSSProperties
+              }
+            >
+              <span>{box.label}</span>
+              <small>{box.detail}</small>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectsPage() {
+  const [activeFilter, setActiveFilter] = useState(projectFilters[0]);
+  const visibleProjects =
+    activeFilter === "all"
+      ? projects
+      : projects.filter((project) => project.category === activeFilter);
+
+  return (
+    <section className="page-section">
+      <div className="page-heading">
+        <p className="eyebrow">Selected Work</p>
+        <h1>Projects</h1>
+        <p>
+          A focused collection of frontend and full-stack practice projects
+          shaped around responsive layouts, clean code, and usable interfaces.
+        </p>
+      </div>
+
+      <div className="filter-row" aria-label="Project filters">
+        {projectFilters.map((filter) => (
+          <button
+            className={activeFilter === filter ? "active" : undefined}
+            key={filter}
+            type="button"
+            onClick={() => setActiveFilter(filter)}
+          >
+            {filter}
+          </button>
+        ))}
+      </div>
+
+      <div className="project-grid project-grid--page">
+        {visibleProjects.map((project) => (
+          <ProjectCard project={project} key={project.title} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <article className={project.image ? "project-card project-card--media" : "project-card"}>
+      {project.image && project.liveUrl ? (
+        <a
+          className="project-card__image-link"
+          href={project.liveUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Open ${project.title} live website`}
+        >
+          <img src={project.image} alt={`${project.title} homepage`} />
+        </a>
+      ) : null}
+
+      <div className="project-card__body">
+        <span>{project.stack}</span>
+        <h3>{project.title}</h3>
+        <p>{project.text}</p>
+
+        {project.liveUrl || project.githubUrl ? (
+          <div className="project-card__actions">
+            {project.liveUrl ? (
+              <a
+                className="button button--primary"
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Live Website
+              </a>
+            ) : null}
+            {project.githubUrl ? (
+              <a
+                className="button button--secondary"
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <section
+        className="footer-connect"
+        id="connect"
+        aria-label="Footer contact details"
+      >
+        <div className="footer-connect__inner">
+          <div className="footer-skills">
+            <h2>Core Skills</h2>
             <p>
-              Ein interaktives Portfolio mit Live-Tokens, Motion-Details und
-              UI-Komponenten, die direkt auf deine Einstellungen reagieren.
+              The tools and technologies used to bring ideas to life with
+              maintainable, production-ready code.
             </p>
-          </div>
 
-          <div className="hero-box-grid">
-            {heroBoxes.map((box, index) => (
-              <button
-                className={`hero-box hero-box--${box.id}`}
-                key={box.id}
-                style={
-                  {
-                    "--box-tone": box.tone,
-                    "--float-delay": `${index * -0.7}s`,
-                  } as CSSProperties
-                }
-              >
-                <span>{box.label}</span>
-                <small>{box.detail}</small>
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section className="portfolio-strip" aria-label="Portfolio highlights">
-          <div>
-            <strong>12+</strong>
-            <span>UI modules</span>
-          </div>
-          <div>
-            <strong>4</strong>
-            <span>Motion styles</span>
-          </div>
-          <div>
-            <strong>100%</strong>
-            <span>Live tokens</span>
-          </div>
-        </section>
-
-        <section className="preview-panel">
-          <div className="panel-heading">
-            <div>
-              <p className="section-label">Featured Work</p>
-              <h2>Portfolio Projects</h2>
-            </div>
-            <Badge label="available" color={primaryColor} />
-          </div>
-          <div className="project-grid">
-            {projectCards.map((project) => (
-              <article
-                className="project-card"
-                key={project.title}
-                style={{ "--project-accent": project.accent } as CSSProperties}
-              >
-                <span className="project-card__type">{project.type}</span>
-                <h3>{project.title}</h3>
-                <p>{project.text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="preview-panel portfolio-dashboard">
-          <div className="skills-panel">
-            <p className="section-label">Skills</p>
-            <h2>What I work with</h2>
-            <div className="skill-list">
-              {skills.map((skill) => (
-                <div className="skill-item" key={skill.name}>
-                  <div className="skill-item__top">
-                    <span>{skill.name}</span>
-                    <strong>{skill.value}%</strong>
-                  </div>
-                  <div className="skill-bar">
-                    <span
-                      style={
-                        {
-                          "--skill-color": skill.color,
-                          "--skill-value": `${skill.value}%`,
-                        } as CSSProperties
-                      }
-                    />
-                  </div>
-                </div>
+            <ul aria-label="Core skills">
+              {coreSkills.map((skill) => (
+                <li key={skill}>{skill}</li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          <div className="process-panel">
-            <p className="section-label">Process</p>
-            <h2>How I build</h2>
-            <ol className="process-list">
-              {processSteps.map((step, index) => (
-                <li key={step}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  {step}
+          <div className="footer-card">
+            <h2>Let's Connect</h2>
+            <ul aria-label="Contact links">
+              {contactLinks.map(({ href, icon: Icon, label }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    rel={href.startsWith("http") ? "noreferrer" : undefined}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                  >
+                    <Icon aria-hidden="true" size={22} strokeWidth={2.2} />
+                    <span>{label}</span>
+                  </a>
                 </li>
               ))}
-            </ol>
+            </ul>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="preview-panel">
-          <p className="section-label">Buttons</p>
-          <div className="component-row component-row--buttons">
-            <Button label="Primary" variant="primary" />
-            <Button label="Secondary" variant="secondary" />
-            <Button label="Outline" variant="outline" />
-            <Button label="Danger" variant="danger" />
-            <Button label="Ghost" variant="ghost" />
-          </div>
-        </section>
-
-        <section className="preview-panel">
-          <p className="section-label">Typography</p>
-          <div className="type-preview">
-            <h2>Design tokens make changes predictable.</h2>
-            <p>
-              Body text, headings and supporting text now react to the token
-              controls in the sidebar.
-            </p>
-            <small>Small text uses its own token set.</small>
-          </div>
-        </section>
-
-        <section className="preview-panel">
-          <p className="section-label">Badges</p>
-          <div className="component-row component-row--badges">
-            {colors.map((c) => (
-              <Badge key={c.name} label={c.name} color={c.value} />
-            ))}
-          </div>
-        </section>
-
-        <section className="contact-band">
-          <div>
-            <p className="section-label">Contact</p>
-            <h2>Let us build something sharp.</h2>
-          </div>
-          <Button label="Say hello" variant="primary" />
-        </section>
-      </main>
-    </div>
+      <section className="footer-bottom" aria-label="Copyright">
+        <strong>Razieh Dorrazaei</strong>
+        <p>Building the web, one pixel at a time.</p>
+        <small>Copyright © 2026 - All rights reserved</small>
+      </section>
+    </footer>
   );
 }

@@ -6,8 +6,8 @@
 | --- | --- |
 | Projektname | Razieh.dev |
 | Dokumenttyp | Produkt- und technische Spezifikation |
-| Version | 1.0 |
-| Stand | 15. Juli 2026 |
+| Version | 1.2 |
+| Stand | 16. Juli 2026 |
 | Status | Beschreibung des aktuellen Produkts mit Zielanforderungen für die Weiterentwicklung |
 | Primäre Sprache der Website | Englisch |
 | Zielplattform | Moderne Desktop-, Tablet- und Mobile-Browser |
@@ -34,7 +34,7 @@ Die Schlüsselwörter werden wie folgt verwendet:
 
 ## 2. Produktvision
 
-Razieh.dev ist ein persönliches Entwicklerportfolio mit einer warmen, charakteristischen „Hive“-Ästhetik. Es präsentiert Fähigkeiten, Arbeitsweise, Projekte und Kontaktmöglichkeiten in einem klaren Scroll-Flow ohne separate Unterseiten.
+Razieh.dev ist ein persönliches Entwicklerportfolio mit einer dunklen, reflektierenden One-Page-Ästhetik. Es präsentiert Fähigkeiten, Arbeitsweise, Projekte und Kontaktmöglichkeiten in einem klaren Scroll-Flow ohne separate Unterseiten.
 
 Das Produkt soll Besucherinnen und Besuchern innerhalb weniger Sekunden beantworten:
 
@@ -51,7 +51,7 @@ Das Produkt soll Besucherinnen und Besuchern innerhalb weniger Sekunden beantwor
 - Professionelle Präsentation von Profil, Fähigkeiten und Projekten.
 - Schnelle Orientierung durch eine klare visuelle Hierarchie.
 - Vollständig responsive Nutzung ab 320 px Viewport-Breite.
-- Demonstration wiederverwendbarer Komponenten, typisierter Projektdaten und konsistenter visueller Tokens.
+- Demonstration wiederverwendbarer Komponenten, typisierter Projektdaten, konsistenter visueller Tokens und einer eigenständigen Hero-Inszenierung.
 - Direkter Zugriff auf Live-Projekte, Quellcode und Kontaktprofile.
 - Gute Bedienbarkeit mit Maus, Touchscreen und Tastatur.
 - Wartbarer, typisierter und überprüfbarer Frontend-Code.
@@ -117,6 +117,9 @@ Im Projekt sind zusätzlich TanStack Router, Tailwind CSS, DaisyUI und Zustand i
 - `src/components/editor/ColorPicker.tsx`: derzeit ungenutzter Editor aus einer früheren Token-Studio-Version.
 - `src/components/ui/Button.tsx`: vorbereitete, derzeit ungenutzte Button-Komponente.
 - `src/components/ui/Badge.tsx`: vorbereitete, derzeit ungenutzte Badge-Komponente.
+- `README.md`: projektbezogene Dokumentation mit Setup, Scripts, Struktur, Designrichtung und Deployment-Hinweisen.
+- `AGENTS.md`: Entwicklungsregeln für Junior-Entwickler und AI-Agents.
+- `AUDIT.md`: priorisierte Aufgabenliste für die Fertigstellung.
 
 ### 5.3 Aktuelle Seitenstruktur
 
@@ -176,7 +179,7 @@ Razieh.dev
 
 #### Hero-Bereich
 
-**FR-HOME-01:** Der Hero MUSS Name beziehungsweise Marke, Tätigkeitsfeld und eine kurze Positionierung zeigen.
+**FR-HOME-01:** Der Hero MUSS den Slogan „Engineered for the Web“, das Tätigkeitsfeld und eine kurze Positionierung zeigen.
 
 **FR-HOME-02:** Die primäre Aktion „View Projects“ MUSS zum Projektbereich derselben Seite führen.
 
@@ -278,7 +281,16 @@ interface Project {
 
 ### 8.1 Visuelle Richtung
 
-Die Oberfläche verwendet eine dunkle, warme Hive-Ästhetik mit Gold- und Honigtönen. Das Design soll professionell, eigenständig und ruhig wirken. Dekorative Animationen dürfen Inhalte und Bedienbarkeit nicht überlagern.
+Die Oberfläche verwendet eine dunkle, cineastische One-Page-Ästhetik mit warmen Goldtönen und ausgeblendeten violett-blauen-orange Reflexionen im Hintergrund. Das Design soll professionell, eigenständig und ruhig wirken. Dekorative Animationen dürfen Inhalte und Bedienbarkeit nicht überlagern.
+
+Der aktuelle Hero zeigt den Slogan:
+
+```text
+Engineered
+for the Web
+```
+
+Die Hero-Headline nutzt eine kräftige, verspielte Serif-Anmutung. Längere Fließtexte bleiben in einer gut lesbaren Sans-Serif-Schrift.
 
 ### 8.2 Basis-Farbpalette
 
@@ -291,6 +303,19 @@ Die Oberfläche verwendet eine dunkle, warme Hive-Ästhetik mit Gold- und Honigt
 | `--gold` | `#ffde59` | Akzente und primäre Aktionen |
 | `--amber` | `#d99a3d` | Sekundärer Akzent |
 | `--bronze` | `#bb8f0a` | Tiefer Akzent |
+| `--font-body` | System-Sans-Stack | Fließtext und UI |
+| `--font-display` | Display-Sans-Stack | große Abschnittsüberschriften |
+| `--font-hero` | Serif-Stack | Hero-Slogan |
+| `--font-signature` | Script-Stack | Brand/Logo |
+
+### 8.2.1 Hintergrund und Reflexionen
+
+- Der Seitenhintergrund SOLL dunkel bleiben, damit Inhalt und Projektkarten klar lesbar bleiben.
+- Die Reflexionsfläche SOLL abstrakt sein und kein konkretes Foto oder Laptop-Bild zeigen.
+- Die Reflexionen DÜRFEN violette, blaue und warme orange Lichtfarben nutzen.
+- Die Reflexionen MÜSSEN weichgezeichnet und dezent bleiben.
+- Die Reflexionsschicht KANN per `position: fixed` als subtiler Parallax-Eindruck wirken.
+- Die Animation MUSS `prefers-reduced-motion: reduce` respektieren.
 
 ### 8.3 Layout
 
@@ -332,6 +357,7 @@ Hover darf niemals die einzige Anzeige für Zustand oder Bedeutung sein.
 - `prefers-reduced-motion: reduce` MUSS respektiert werden.
 - Daueranimationen DÜRFEN Inhalte nicht schwer lesbar machen.
 - Scrollen bei Navigation MUSS bei reduzierter Bewegung ohne Smooth-Animation erfolgen.
+- Der Reflexionshintergrund SOLL langsam und subtil animiert sein.
 
 ## 9. Accessibility-Anforderungen
 
@@ -598,11 +624,11 @@ Eine Änderung gilt als abgeschlossen, wenn:
 6. neue öffentliche Funktionen dokumentiert sind,
 7. keine geheimen oder unbeabsichtigt privaten Daten enthalten sind.
 
-## 18. Abnahmekriterien für Version 1.0
+## 18. Abnahmekriterien für die produktionsreife Version
 
 ### Portfolio
 
-- [ ] Besucher verstehen im ersten sichtbaren Bereich Name, Rolle und Schwerpunkt.
+- [ ] Besucher verstehen im ersten sichtbaren Bereich Slogan, Rolle und Schwerpunkt.
 - [ ] Home, Projects und Contact sind zuverlässig per Anker erreichbar.
 - [ ] Browsernavigation und direkter Reload der Startseite funktionieren.
 - [ ] Reale Projekte besitzen funktionierende Live- und/oder GitHub-Links.
@@ -616,7 +642,8 @@ Eine Änderung gilt als abgeschlossen, wenn:
 - [ ] Alle Ziel-Viewports funktionieren ohne horizontales Scrollen.
 - [ ] Reduzierte Bewegung wird respektiert.
 - [ ] Unbenutzte Produktionsabhängigkeiten wurden entfernt oder dokumentiert begründet.
-- [ ] Die Projekt-README enthält Installation, Scripts, Architektur und Deployment.
+- [x] Die Projekt-README enthält Installation, Scripts, Architektur und Deployment.
+- [x] Eine `AGENTS.md` mit Entwicklungsregeln für Junior-Entwickler ist vorhanden.
 
 ## 19. Priorisierte Roadmap
 
@@ -626,7 +653,7 @@ Eine Änderung gilt als abgeschlossen, wenn:
 2. Alle internen Anker und Kontaktlinks prüfen.
 3. Zugängliche Labels und Fokuszustände ergänzen.
 4. Reale Projektinhalte von Platzhaltern unterscheiden.
-5. README und Metadaten auf das One-Page-Portfolio aktualisieren.
+5. Metadaten auf das One-Page-Portfolio aktualisieren.
 
 ### Priorität 2: Codequalität
 
@@ -638,7 +665,7 @@ Eine Änderung gilt als abgeschlossen, wenn:
 
 ### Priorität 3: Portfolio-Polish
 
-1. README und Projektdokumentation vervollständigen.
+1. README, Spec, Audit und AGENTS.md konsistent halten.
 2. SEO-, Open-Graph- und Favicon-Daten ergänzen.
 3. Projektbilder optimieren und Lazy Loading ergänzen.
 4. Lebenslauf-Link bewusst integrieren.
@@ -660,7 +687,8 @@ Vor größeren Änderungen sollten folgende Fragen beantwortet werden:
 - Automatisierte Tests und ein `test`-Script fehlen.
 - Die Hauptkomponente und das zentrale Stylesheet sind für langfristige Wartung sehr groß.
 - Mehrere installierte Bibliotheken sowie vorbereitete UI-/Token-Studio-Komponenten werden nicht verwendet.
-- Die README beschreibt momentan hauptsächlich die Vite-Vorlage statt dieses Produkts.
+- Projektinhalte und Platzhalterprojekte müssen vor finaler Veröffentlichung noch geprüft werden.
+- Open-Graph-Bild, Favicon und finale Deployment-Konfiguration fehlen noch.
 
 ## 22. Änderungsprotokoll
 
@@ -668,3 +696,4 @@ Vor größeren Änderungen sollten folgende Fragen beantwortet werden:
 | --- | --- | --- |
 | 1.0 | 15.07.2026 | Erste vollständige Produkt- und technische Spezifikation auf Basis des bestehenden Projekts |
 | 1.1 | 15.07.2026 | Aktualisierung auf One-Page-Portfolio ohne Learners- und Projects-Unterseiten |
+| 1.2 | 16.07.2026 | Aktualisierung auf aktuellen Hero-Slogan, Reflexionshintergrund, README und AGENTS.md |

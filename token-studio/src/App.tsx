@@ -39,10 +39,13 @@ const projects: Project[] = [
     text: "A clean personal site with smooth sections, reusable components, and a sharp first impression.",
   },
   {
-    title: "Design Token Studio",
-    stack: "React, Zustand, TypeScript",
-    category: "design system",
-    text: "A live editor for color, spacing, and typography tokens with instant component previews.",
+    title: "Glow Shop",
+    stack: "React, CSS, Shopping UI",
+    category: "frontend",
+    text: "A soft beauty and skincare shop interface with a polished hero section, product-focused layout, and cart navigation.",
+    image: "/glow-shop-home.png",
+    liveUrl: "https://razidorra.github.io/glowShop/",
+    githubUrl: "https://github.com/razidorra/glowShop/",
   },
   {
     title: "Full Stack Practice App",

@@ -78,7 +78,7 @@ Ziel: Alle Projekte auf der Seite sollen entweder echte Projekte sein oder klar 
 - [ ] Lifestyle Quiz Live-Link testen.
 - [ ] Lifestyle Quiz GitHub-Link testen.
 - [ ] Für Responsive Portfolio echten Link ergänzen oder Text als Konzept/Portfolio-Projekt anpassen.
-- [ ] Für Design Token Studio entscheiden: bleibt es als Projektkarte oder wird es entfernt?
+- [x] Design Token Studio als Projektkarte durch Glow Shop ersetzen.
 - [ ] Für Full Stack Practice App echten GitHub-Link ergänzen oder Text als Lernprojekt kennzeichnen.
 - [ ] Für Dashboard Cards echten GitHub-Link ergänzen oder Text als UI-Experiment kennzeichnen.
 - [ ] Projektbilder ergänzen, wo echte Screenshots vorhanden sind.

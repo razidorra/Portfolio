@@ -3,10 +3,8 @@
   --ink-soft: #1d130d;
   --cream: #fff7e8;
   --cream-muted: rgba(255, 247, 232, 0.68);
-  --gold: #ffde59;
-  --amber: #d99a3d;
-  --bronze: #bb8f0a;
-  --line: rgba(255, 222, 89, 0.16);
+  --copper: #d59a72;
+  --line: rgba(213, 154, 114, 0.16);
   --font-body: Inter, "Segoe UI", Roboto, Arial, sans-serif;
   --font-display: "Avenir Next", "Trebuchet MS", Inter, "Segoe UI", sans-serif;
   --font-hero: Georgia, "Bookman Old Style", "Book Antiqua", "Palatino Linotype",
@@ -93,7 +91,7 @@ main,
 }
 
 .brand {
-  color: var(--gold);
+  color: var(--copper);
   font-family: var(--font-signature);
   font-size: clamp(24px, 2.6vw, 34px);
   font-weight: 400;
@@ -122,8 +120,8 @@ main,
 
 .main-nav a:hover,
 .main-nav a:focus-visible {
-  color: var(--gold);
-  border-color: var(--gold);
+  color: var(--copper);
+  border-color: var(--copper);
 }
 
 main {
@@ -156,8 +154,8 @@ main {
 .hero-glow--line {
   width: min(45rem, 74vw);
   height: 1px;
-  background: rgba(255, 222, 89, 0.35);
-  box-shadow: 0 0 44px rgba(255, 222, 89, 0.26);
+  background: rgba(213, 154, 114, 0.35);
+  box-shadow: 0 0 44px rgba(213, 154, 114, 0.26);
 }
 
 .hero-copy {
@@ -170,7 +168,7 @@ main {
 .section-kicker,
 .card-title {
   margin: 0 0 20px;
-  color: var(--gold);
+  color: var(--copper);
   font-size: clamp(11px, 1.4vw, 14px);
   font-weight: 700;
   letter-spacing: clamp(0.28em, 1vw, 0.58em);
@@ -191,7 +189,7 @@ main {
   text-align: left;
   text-transform: none;
   text-shadow:
-    0 1px 0 rgba(255, 222, 89, 0.18),
+    0 1px 0 rgba(213, 154, 114, 0.18),
     0 18px 44px rgba(0, 0, 0, 0.45);
 }
 
@@ -225,9 +223,9 @@ main {
   justify-content: center;
   min-height: 48px;
   padding: 0 24px;
-  color: var(--gold);
+  color: var(--copper);
   background: transparent;
-  border: 1px solid rgba(255, 222, 89, 0.34);
+  border: 1px solid rgba(213, 154, 114, 0.34);
   border-radius: 4px;
   font-size: 12px;
   font-weight: 800;
@@ -243,8 +241,8 @@ main {
 
 .button:hover {
   color: var(--ink);
-  background: var(--gold);
-  border-color: var(--gold);
+  background: var(--copper);
+  border-color: var(--copper);
   transform: translateY(-2px);
 }
 
@@ -265,9 +263,9 @@ main {
   place-items: center;
   width: 48px;
   height: 54px;
-  color: var(--gold);
+  color: var(--copper);
   clip-path: polygon(50% 0, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-  border: 1px solid var(--gold);
+  border: 1px solid var(--copper);
   transform: translateX(-50%);
   animation: honeyPulse 2.2s ease-in-out infinite;
 }
@@ -280,7 +278,6 @@ main {
   transform: translateY(-3px) rotate(45deg);
 }
 
-.hive-entry,
 .works-showcase,
 .about-section,
 .stats-strip,
@@ -288,80 +285,6 @@ main {
 .home-projects {
   width: min(1220px, calc(100% - clamp(28px, 8vw, 112px)));
   margin-inline: auto;
-}
-
-.hive-entry {
-  padding: clamp(72px, 10vw, 124px) 0 clamp(44px, 8vw, 92px);
-}
-
-.hive-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(16px, 3vw, 42px);
-  margin-top: clamp(34px, 6vw, 72px);
-}
-
-.hive-tile {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: clamp(136px, 19vw, 248px);
-  aspect-ratio: 1;
-  overflow: hidden;
-  isolation: isolate;
-  clip-path: polygon(50% 0, 94% 25%, 94% 75%, 50% 100%, 6% 75%, 6% 25%);
-  background:
-    linear-gradient(145deg, rgba(255, 222, 89, 0.18), rgba(187, 143, 10, 0.08)),
-    radial-gradient(circle at 50% 35%, rgba(255, 247, 232, 0.16), transparent 44%);
-  transition:
-    transform 0.45s ease,
-    filter 0.45s ease;
-}
-
-.hive-tile::before {
-  position: absolute;
-  inset: 9%;
-  z-index: -1;
-  content: "";
-  clip-path: inherit;
-  background:
-    linear-gradient(120deg, transparent 0 38%, rgba(255, 247, 232, 0.13) 39% 42%, transparent 43%),
-    rgba(18, 12, 8, 0.76);
-  border: 1px solid rgba(255, 222, 89, 0.2);
-}
-
-.hive-tile::after {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  content: "";
-  background: rgba(0, 0, 0, 0.18);
-}
-
-.hive-tile span {
-  color: var(--cream);
-  font-size: clamp(18px, 2.8vw, 32px);
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.hive-tile:hover {
-  filter: brightness(1.16);
-  transform: translateY(-8px) scale(1.03);
-}
-
-.hive-tile--amber {
-  background-color: rgba(217, 154, 61, 0.24);
-}
-
-.hive-tile--bronze {
-  background-color: rgba(187, 143, 10, 0.22);
-}
-
-.hive-tile--muted {
-  opacity: 0.72;
 }
 
 .works-showcase {
@@ -398,10 +321,10 @@ main {
   place-items: center;
   min-height: clamp(260px, 36vw, 460px);
   overflow: hidden;
-  color: rgba(255, 222, 89, 0.18);
+  color: rgba(213, 154, 114, 0.18);
   background:
-    linear-gradient(135deg, rgba(255, 222, 89, 0.12), rgba(255, 247, 232, 0.03)),
-    repeating-linear-gradient(60deg, rgba(255, 222, 89, 0.06) 0 1px, transparent 1px 28px),
+    linear-gradient(135deg, rgba(213, 154, 114, 0.12), rgba(255, 247, 232, 0.03)),
+    repeating-linear-gradient(60deg, rgba(213, 154, 114, 0.06) 0 1px, transparent 1px 28px),
     var(--ink-soft);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -433,7 +356,7 @@ main {
 .work-copy > p:first-child,
 .project-card span {
   margin: 0 0 20px;
-  color: var(--gold);
+  color: var(--copper);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.26em;
@@ -451,16 +374,6 @@ main {
   text-transform: uppercase;
 }
 
-.work-copy > span {
-  position: absolute;
-  top: -28px;
-  right: 0;
-  color: rgba(255, 222, 89, 0.12);
-  font-size: clamp(70px, 10vw, 124px);
-  font-weight: 900;
-  line-height: 1;
-}
-
 .work-copy > p:not(:first-child) {
   max-width: 590px;
   margin: 26px 0 0;
@@ -474,7 +387,7 @@ main {
 }
 
 .work-links a {
-  color: var(--gold);
+  color: var(--copper);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.28em;
@@ -517,6 +430,28 @@ main {
   line-height: 1.7;
 }
 
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  margin-top: 36px;
+}
+
+.skill-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 10px 16px;
+  color: var(--cream);
+  background: rgba(255, 247, 232, 0.045);
+  border-left: 2px solid rgba(213, 154, 114, 0.72);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
 .strength-grid,
 .process-cards,
 .project-grid {
@@ -529,7 +464,7 @@ main {
 .project-card,
 .about-card {
   padding: 26px;
-  background: rgba(255, 222, 89, 0.045);
+  background: rgba(213, 154, 114, 0.045);
   border: 1px solid var(--line);
   border-radius: 8px;
 }
@@ -573,7 +508,7 @@ main {
 }
 
 .stats-strip strong {
-  color: var(--gold);
+  color: var(--copper);
   font-size: clamp(24px, 3vw, 34px);
   line-height: 1.05;
 }
@@ -612,7 +547,7 @@ main {
   height: 48px;
   margin-bottom: 34px;
   color: var(--ink);
-  background: var(--gold);
+  background: var(--copper);
   clip-path: polygon(50% 0, 94% 25%, 94% 75%, 50% 100%, 6% 75%, 6% 25%);
   font-size: 12px;
   font-weight: 900;
@@ -634,8 +569,8 @@ main {
 }
 
 .project-card:hover {
-  background: rgba(255, 222, 89, 0.075);
-  border-color: rgba(255, 222, 89, 0.34);
+  background: rgba(213, 154, 114, 0.075);
+  border-color: rgba(213, 154, 114, 0.34);
   transform: translateY(-6px);
 }
 
@@ -738,11 +673,10 @@ main {
   gap: 10px;
 }
 
-.footer-skills li,
-.skill-list span {
+.footer-skills li {
   padding: 8px 12px;
-  color: var(--gold);
-  border: 1px solid rgba(255, 222, 89, 0.25);
+  color: var(--copper);
+  border: 1px solid rgba(213, 154, 114, 0.25);
   border-radius: 4px;
   font-size: 12px;
   font-weight: 800;
@@ -752,7 +686,7 @@ main {
 
 .footer-card {
   padding: 30px;
-  background: rgba(255, 222, 89, 0.045);
+  background: rgba(213, 154, 114, 0.045);
   border: 1px solid var(--line);
   border-radius: 8px;
 }
@@ -777,13 +711,13 @@ main {
 }
 
 .footer-card a:hover {
-  color: var(--gold);
+  color: var(--copper);
   transform: translateX(3px);
 }
 
 .footer-card svg {
   flex: 0 0 auto;
-  color: var(--gold);
+  color: var(--copper);
 }
 
 .footer-bottom {
@@ -904,39 +838,18 @@ main {
     width: 100%;
   }
 
-  .hive-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hive-tile {
-    width: 100%;
-  }
-
-  .work-copy > span {
-    position: static;
-    display: block;
-    margin-top: 18px;
-    font-size: 54px;
-  }
-
   .project-card__actions .button {
     width: 100%;
   }
 }
 
 @media (max-width: 460px) {
-  .hive-entry,
   .works-showcase,
   .about-section,
   .stats-strip,
   .process-section,
   .home-projects {
     width: min(100% - 24px, 1220px);
-  }
-
-  .hive-grid {
-    grid-template-columns: 1fr;
   }
 
   .work-media {

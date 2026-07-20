@@ -61,14 +61,6 @@ const projects: Project[] = [
   },
 ];
 
-const hiveTiles = [
-  { label: "Works", href: "#works", tone: "gold" },
-  { label: "Roots", href: "#roots", tone: "amber" },
-  { label: "Skills", href: "#skills", tone: "bronze" },
-  { label: "Projects", href: "#projects", tone: "muted" },
-  { label: "Join", href: "#connect", tone: "honey" },
-];
-
 const stats = [
   { value: "Frontend", label: "Responsive interfaces" },
   { value: "Full Stack", label: "Node.js and data basics" },
@@ -199,30 +191,15 @@ function HomePage() {
           </div>
         </div>
 
-        <a className="scroll-hint" href="#hive" aria-label="Scroll to navigation">
+        <a className="scroll-hint" href="#works" aria-label="Scroll to selected projects">
           <span />
         </a>
-      </section>
-
-      <section className="hive-entry" id="hive" aria-label="Portfolio navigation">
-        <p className="section-kicker">Enter the Hive</p>
-        <div className="hive-grid">
-          {hiveTiles.map((tile) => (
-            <a
-              className={`hive-tile hive-tile--${tile.tone}`}
-              href={tile.href}
-              key={tile.label}
-            >
-              <span>{tile.label}</span>
-            </a>
-          ))}
-        </div>
       </section>
 
       <section className="works-showcase" id="works" aria-label="Selected projects">
         <p className="section-kicker">Selected Work</p>
         <div className="work-stack">
-          {featuredProjects.map((project, index) => (
+          {featuredProjects.map((project) => (
             <article className="work-feature" key={project.title}>
               <div className="work-media">
                 {project.image ? (
@@ -234,7 +211,6 @@ function HomePage() {
               <div className="work-copy">
                 <p>{project.stack}</p>
                 <h2>{project.title}</h2>
-                <span>{String(index + 1).padStart(2, "0")}</span>
                 <p>{project.text}</p>
                 <div className="work-links">
                   {project.liveUrl ? (

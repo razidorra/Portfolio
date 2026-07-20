@@ -163,9 +163,16 @@ function HomePage() {
     <>
       <section className="hero" id="home">
         <div className="hero-glow hero-glow--large" aria-hidden="true" />
-        <div className="hero-glow hero-glow--line" aria-hidden="true" />
+        <div className="hero-code" aria-hidden="true">
+          <span className="hero-code--tag">{"<div>"}</span>
+          <span className="hero-code--flex">{"{ flex: 1 }"}</span>
+          <span className="hero-code--state">useState()</span>
+          <span className="hero-code--close">{"</>"}</span>
+          <span className="hero-code--render">{"=> render()"}</span>
+        </div>
         <div className="hero-copy">
           <p className="eyebrow">Frontend Developer</p>
+          <div className="hero-divider" aria-hidden="true" />
           <h1>
             Engineered
             <span>for the Web</span>

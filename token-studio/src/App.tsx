@@ -33,10 +33,13 @@ const projects: Project[] = [
     githubUrl: "https://github.com/razidorra/lifestyleQuiz",
   },
   {
-    title: "Responsive Portfolio",
-    stack: "React, CSS, UI Design",
+    title: "Glowify",
+    stack: "HTML, CSS, JavaScript",
     category: "frontend",
-    text: "A clean personal site with smooth sections, reusable components, and a sharp first impression.",
+    text: "A responsive beauty and skincare shop with a polished mobile-first design, clear product navigation, and an inviting shopping experience.",
+    image: "/glowify-product-showcase.png",
+    liveUrl: "https://razidorra.github.io/glowShop/",
+    githubUrl: "https://github.com/razidorra/glowShop",
   },
   {
     title: "AutoFlow Workshop",

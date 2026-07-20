@@ -39,13 +39,13 @@ const projects: Project[] = [
     text: "A clean personal site with smooth sections, reusable components, and a sharp first impression.",
   },
   {
-    title: "Glow Shop",
-    stack: "React, CSS, Shopping UI",
+    title: "AutoFlow Workshop",
+    stack: "HTML, CSS, JavaScript",
     category: "frontend",
-    text: "A soft beauty and skincare shop interface with a polished hero section, product-focused layout, and cart navigation.",
-    image: "/glow-shop-home.png",
-    liveUrl: "https://razidorra.github.io/glowShop/",
-    githubUrl: "https://github.com/razidorra/glowShop/",
+    text: "A responsive automotive workshop website with service information, contact navigation, and a clear appointment booking flow.",
+    image: "/autoflow-workshop-home.png",
+    liveUrl: "https://razidorra.github.io/project/",
+    githubUrl: "https://github.com/razidorra/project",
   },
   {
     title: "Full Stack Practice App",
@@ -162,13 +162,17 @@ function HomePage() {
   return (
     <>
       <section className="hero" id="home">
-        <div className="hero-glow hero-glow--large" aria-hidden="true" />
         <div className="hero-code" aria-hidden="true">
           <span className="hero-code--tag">{"<div>"}</span>
           <span className="hero-code--flex">{"{ flex: 1 }"}</span>
           <span className="hero-code--state">useState()</span>
           <span className="hero-code--close">{"</>"}</span>
           <span className="hero-code--render">{"=> render()"}</span>
+          <span className="hero-code--component">{"<Component />"}</span>
+          <span className="hero-code--props">interface Props</span>
+          <span className="hero-code--map">.map()</span>
+          <span className="hero-code--async">async / await</span>
+          <span className="hero-code--const">{"const app = () =>"}</span>
         </div>
         <div className="hero-copy">
           <p className="eyebrow">Frontend Developer</p>

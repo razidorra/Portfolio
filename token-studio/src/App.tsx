@@ -57,10 +57,12 @@ const projects: Project[] = [
     text: "A learning project focused on practical data flows, clear interfaces, and maintainable code.",
   },
   {
-    title: "Dashboard Cards",
-    stack: "React, Responsive CSS",
-    category: "frontend",
-    text: "Compact interface cards for scanning status, comparing metrics, and keeping actions close.",
+    title: "Raaji Baluch Blog",
+    stack: "React, Vite, Express, Clerk",
+    category: "full stack",
+    text: "A community blog about Baluchistan with posts, comments, videos, secure authentication, and a responsive interface.",
+    image: "/raaji-baluch-blog-home.png",
+    githubUrl: "https://github.com/razidorra/Blog",
   },
 ];
 
@@ -320,16 +322,22 @@ function HomePage() {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article className={project.image ? "project-card project-card--media" : "project-card"}>
-      {project.image && project.liveUrl ? (
-        <a
-          className="project-card__image-link"
-          href={project.liveUrl}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Open ${project.title} live website`}
-        >
-          <img src={project.image} alt={`${project.title} homepage`} />
-        </a>
+      {project.image ? (
+        project.liveUrl ? (
+          <a
+            className="project-card__image project-card__image--link"
+            href={project.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Open ${project.title} live website`}
+          >
+            <img src={project.image} alt={`${project.title} homepage`} />
+          </a>
+        ) : (
+          <div className="project-card__image">
+            <img src={project.image} alt={`${project.title} homepage`} />
+          </div>
+        )
       ) : null}
 
       <div className="project-card__body">

@@ -670,7 +670,7 @@ main {
   padding: 0;
 }
 
-.project-card__image-link {
+.project-card__image {
   display: block;
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -678,7 +678,7 @@ main {
   border-bottom: 1px solid var(--line);
 }
 
-.project-card__image-link img {
+.project-card__image img {
   display: block;
   width: 100%;
   height: 100%;
@@ -690,7 +690,7 @@ main {
     transform 0.3s ease;
 }
 
-.project-card__image-link:hover img {
+.project-card__image--link:hover img {
   filter: brightness(0.82) saturate(0.86) contrast(1);
   transform: scale(1.04);
 }

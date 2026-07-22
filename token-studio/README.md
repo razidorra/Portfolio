@@ -1,204 +1,115 @@
 # Razieh.dev Portfolio
 
-One-page portfolio for Razieh Dorrazaei, built with React, TypeScript and Vite.
+An accessible, responsive one-page portfolio for frontend developer Razieh Dorrazaei. It presents selected work, technical strengths, development process, contact links, and a downloadable CV.
 
-The page presents a frontend developer profile, selected work, skills, process and contact links in one scrollable experience.
+![Razieh Dorrazaei frontend developer portfolio preview](./public/social-preview.png)
 
-## Current Status
+## Features
 
-This project is in active portfolio development.
+- responsive one-page layout
+- click-to-enter intro screen with direct-link bypass
+- staggered first-name and surname entrance animation
+- matching text-free cinematic background derived from the intro artwork
+- selected work and complete project archive
+- explicit labels for published, source-only, and learning projects
+- keyboard-visible focus states and skip navigation
+- reduced-motion support
+- responsive public asset paths for root or subpath deployment
+- automated component tests
+- Open Graph and favicon metadata
 
-Already done:
-
-- one-page structure
-- hero section with slogan: `Engineered for the Web`
-- animated abstract reflection background
-- project cards
-- contact section
-- project specification
-- audit and task checklist
-- basic development guidelines
-
-Still planned:
-
-- replace placeholder projects with final real projects
-- clean up unused dependencies from earlier experiments
-- split large files into smaller components
-- improve README screenshots and deployment notes
-- add automated tests
-
-## Tech Stack
+## Tech stack
 
 - React 19
 - TypeScript
 - Vite 8
-- CSS custom properties
+- classic CSS with custom properties
 - Lucide React icons
+- Vitest and React Testing Library
 - ESLint
 
-Some dependencies from earlier experiments are still installed but not currently used in the app, for example TanStack Router, Tailwind CSS, DaisyUI and Zustand. See [AUDIT.md](./AUDIT.md) for the cleanup plan.
+## Getting started
 
-## Getting Started
-
-Install dependencies:
+Requirements: a current Node.js LTS release and npm.
 
 ```bash
 npm install
-```
-
-Start the development server:
-
-```bash
 npm run dev
 ```
 
-Build for production:
+Vite prints the local development URL after startup.
+
+## Quality commands
 
 ```bash
+npm test
+npm run lint
 npm run build
-```
-
-Preview the production build:
-
-```bash
 npm run preview
 ```
 
-Run linting:
-
-```bash
-npm run lint
-```
-
-## Available Scripts
-
 | Command | Purpose |
 | --- | --- |
-| `npm run dev` | Starts the Vite development server |
-| `npm run lint` | Runs ESLint |
-| `npm run build` | Runs TypeScript build and Vite production build |
-| `npm run preview` | Serves the production build locally |
+| `npm run dev` | Start the development server |
+| `npm test` | Run all component tests once |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run lint` | Check TypeScript and TSX files with ESLint |
+| `npm run build` | Type-check and create the production bundle |
+| `npm run preview` | Serve the production bundle locally |
 
-## Project Structure
-
-```text
-.
-├── public/
-│   ├── glow-shop-home.png
-│   ├── lifestyle-quiz-home.png
-│   └── updated-CV.pdf
-├── src/
-│   ├── App.tsx
-│   ├── App.css
-│   ├── components/
-│   ├── lib/
-│   ├── store/
-│   └── main.tsx
-├── AGENTS.md
-├── AUDIT.md
-├── spec.md
-└── README.md
-```
-
-The current implementation still keeps most UI and data in `src/App.tsx` and most styling in `src/App.css`. The planned direction is to split the app into `components/`, `sections/` and `data/` modules.
-
-## Main Files
-
-- [src/App.tsx](./src/App.tsx): portfolio content, sections and project cards
-- [src/App.css](./src/App.css): global styling, hero design, responsive layout and animations
-- [AGENTS.md](./AGENTS.md): development rules for junior developers and AI agents
-- [AUDIT.md](./AUDIT.md): ordered checklist for finishing the project
-- [spec.md](./spec.md): product and technical specification
-
-## Design Direction
-
-The design uses:
-
-- dark cinematic background
-- soft purple, blue and orange reflection effects
-- large expressive hero typography
-- warm cream and gold text colors
-- responsive project grids
-- simple one-page navigation
-
-The hero slogan is:
+## Project structure
 
 ```text
-Engineered
-for the Web
+src/
+├── components/
+│   ├── layout/
+│   └── projects/
+├── data/
+│   ├── portfolio.ts
+│   └── projects.ts
+├── sections/
+├── test/
+├── App.css
+├── App.tsx
+└── main.tsx
 ```
 
-## Development Principles
+Portfolio content is maintained in `src/data`. Page sections receive this data through typed props, and `App.tsx` only composes the page.
 
-This project should stay understandable for junior developers.
+## Projects
 
-Follow:
+The project archive currently distinguishes between:
 
-- KISS: keep the implementation simple
-- YAGNI: do not build features before they are needed
-- SOLID: keep components focused and props clear
+- published projects with live and source links
+- GitHub-only projects
+- ongoing learning projects without misleading action buttons
 
-Read [AGENTS.md](./AGENTS.md) before making larger changes.
-
-## Quality Checklist
-
-Before pushing changes, run:
-
-```bash
-npm run lint
-npm run build
-```
-
-Also check:
-
-- the page works on mobile and desktop
-- links are not broken
-- project cards do not show empty buttons
-- text is readable on the animated background
-- no placeholder content is accidentally presented as final work
-
-## Documentation
-
-This repository includes three project documents:
-
-- [spec.md](./spec.md): what the portfolio should be and how it should work
-- [AUDIT.md](./AUDIT.md): step-by-step checklist for finishing the project
-- [AGENTS.md](./AGENTS.md): coding and collaboration rules
-
-Use them together:
-
-1. Read `spec.md` to understand the product.
-2. Use `AUDIT.md` to choose the next task.
-3. Follow `AGENTS.md` while implementing.
+Add or update projects in `src/data/projects.ts`. Optional images belong in `public/` and need a meaningful `imageAlt` value.
 
 ## Deployment
 
-The project is a Vite app. A production build is generated in `dist/`.
+Create the production output in `dist/`:
 
 ```bash
 npm run build
 ```
 
-Possible hosting options:
+The app can be deployed to GitHub Pages, Netlify, Vercel, or another static host. It currently uses Vite's default root base (`/`). If the final host serves the site under a repository subpath, set `base` in `vite.config.ts` before deployment. Public image and CV URLs already use `import.meta.env.BASE_URL`.
 
-- GitHub Pages
-- Netlify
-- Vercel
+The final public URL is intentionally not documented yet because the hosting target has not been selected.
 
-If the site is deployed under a subpath, configure the Vite `base` option before building.
+## Accessibility and responsive checks
 
-## Repository
+The implementation includes one `h1`, labelled regions, safe external links, a skip link, visible keyboard focus, 44 px touch targets for important controls, and reduced-motion handling. The production preview should still be checked manually with keyboard navigation and on a real mobile device before release.
 
-GitHub repository:
+## Project documentation
 
-```text
-git@github.com:razidorra/Portfolio.git
-```
+- [spec.md](./spec.md): product and technical requirements
+- [AUDIT.md](./AUDIT.md): phase-by-phase completion record
+- [AGENTS.md](./AGENTS.md): development rules
 
-## Author
+## Contact
 
-Razieh Dorrazaei
-
-- GitHub: [github.com/razidorra](https://github.com/razidorra)
-- LinkedIn: [linkedin.com/in/Razidorra](https://linkedin.com/in/Razidorra)
-- Email: [dorra.razi@gmail.com](mailto:dorra.razi@gmail.com)
+- [GitHub](https://github.com/razidorra)
+- [LinkedIn](https://linkedin.com/in/Razidorra)
+- [Email](mailto:dorra.razi@gmail.com)

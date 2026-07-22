@@ -14,6 +14,17 @@ Dieses Projekt ist ein persönliches One-Page-Portfolio mit:
 - klassischem CSS
 - statischen Daten im Frontend
 
+Der aktuelle Produktstand umfasst:
+
+- einen bildschirmfüllenden Intro-Screen vor dem eigentlichen Portfolio
+- eine buchstabenweise Namensanimation von links und rechts
+- einen gemeinsamen dunklen Hintergrund mit Kupfer-, Rosé-, Violett- und Blautönen
+- animierte SVG-Polarlichtlinien auf Intro und Hauptseite
+- einen Scroll-Effekt, der die Lichtlinien der Hauptseite kurz verstärkt
+- eine Serifenschrift für Namen und Überschriften sowie Sans-Serif für Fließtext und UI
+- eine One-Page-Hauptansicht mit Header, Hero, Arbeiten, About, Highlights, Prozess, Projekten und Footer
+- Hash-Links, die den Intro-Screen überspringen und direkt zum gewünschten Abschnitt führen
+
 Wichtig: Der Anwendungscode wird in TypeScript geschrieben. Neue React-Dateien sollen `.tsx` verwenden, reine Hilfsdateien sollen `.ts` verwenden. Für App-Code sollen keine neuen `.js`- oder `.jsx`-Dateien angelegt werden.
 
 Die App soll einfach, verständlich, responsive und gut wartbar bleiben.
@@ -22,6 +33,7 @@ Die App soll einfach, verständlich, responsive und gut wartbar bleiben.
 
 ```bash
 npm run dev
+npm test
 npm run lint
 npm run build
 ```
@@ -29,6 +41,7 @@ npm run build
 Vor jedem Commit sollten mindestens diese Befehle erfolgreich sein:
 
 ```bash
+npm test
 npm run lint
 npm run build
 ```
@@ -221,6 +234,8 @@ Für dieses Portfolio gilt:
 - statische Inhalte brauchen keinen State
 - Projekte können als Datenliste gepflegt werden
 - UI-Animationen sollten möglichst über CSS laufen
+- der lokale `showIntro`-State in `App.tsx` steuert ausschließlich den Einstieg
+- direkte Hash-Aufrufe müssen den Intro-Screen weiterhin überspringen
 
 ## TypeScript-Regeln
 
@@ -256,6 +271,11 @@ interface Project {
 - Prüfe Mobile zuerst, wenn Layout bricht.
 - Vermeide sehr lange Selektoren.
 - Vermeide unnötige Animationen.
+- Nutze für neue dekorative Bewegung keine zusätzliche Animationsbibliothek.
+- Erhalte die gemeinsame Hintergrundsprache aus Kupfer, Rosé, Violett und Blau.
+- Intro und Hauptseite dürfen dieselbe `BackgroundLightTrails`-Komponente verwenden.
+- Der Header soll visuell in den Hintergrund übergehen und keine undurchsichtige Fremdfläche bilden.
+- Scroll-Verstärkung und Daueranimationen müssen `prefers-reduced-motion` respektieren.
 
 Gute CSS-Ziele:
 
@@ -286,23 +306,31 @@ Externe Links:
 </a>
 ```
 
-## Datei-Struktur Zielbild
+## Aktuelle Datei-Struktur
 
-Wenn das Projekt weiter refactored wird, ist diese Struktur sinnvoll:
+Die aktuelle Struktur ist bereits nach Verantwortungsbereichen getrennt:
 
 ```text
 src/
 ├── components/
 │   ├── layout/
-│   ├── projects/
-│   └── ui/
+│   │   ├── BackgroundLightTrails.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   └── IntroScreen.tsx
+│   └── projects/
+│       └── ProjectCard.tsx
 ├── data/
+│   ├── portfolio.ts
+│   └── projects.ts
 ├── sections/
-├── styles/
+├── test/
+├── App.css
+├── App.tsx
 └── main.tsx
 ```
 
-Nicht alles muss sofort umgebaut werden. Refactor nur, wenn es die aktuelle Aufgabe wirklich verbessert.
+Tests liegen neben den getesteten Komponenten und Sections. Refactor nur, wenn es die aktuelle Aufgabe wirklich verbessert.
 
 ## Was du vermeiden sollst
 
@@ -324,6 +352,8 @@ Vor dem Abschluss einer Aufgabe:
 - [ ] keine offensichtlichen Platzhalter eingeführt
 - [ ] responsive Verhalten grob geprüft
 - [ ] Accessibility nicht verschlechtert
+- [ ] Animationen und `prefers-reduced-motion` geprüft, falls Motion betroffen ist
+- [ ] `npm test` erfolgreich
 - [ ] `npm run lint` erfolgreich
 - [ ] `npm run build` erfolgreich
 - [ ] Änderungen kurz erklärt

@@ -6,9 +6,9 @@
 | --- | --- |
 | Projektname | Razieh.dev |
 | Dokumenttyp | Produkt- und technische Spezifikation |
-| Version | 1.2 |
-| Stand | 16. Juli 2026 |
-| Status | Beschreibung des aktuellen Produkts mit Zielanforderungen für die Weiterentwicklung |
+| Version | 1.4 |
+| Stand | 22. Juli 2026 |
+| Status | Aktualisierte Beschreibung des implementierten Produkts mit Zielanforderungen für die Weiterentwicklung |
 | Primäre Sprache der Website | Englisch |
 | Zielplattform | Moderne Desktop-, Tablet- und Mobile-Browser |
 
@@ -103,20 +103,21 @@ Können die Projektstruktur und den Aufbau des Portfolios als nachvollziehbares 
 | Build Tool | Vite 8 |
 | Icons | Lucide React |
 | Styling | Klassisches CSS und CSS Custom Properties |
-| Qualität | ESLint und TypeScript Compiler |
+| Qualität | ESLint, TypeScript Compiler, Vitest und React Testing Library |
 | Paketverwaltung | npm |
 
-Im Projekt sind zusätzlich TanStack Router, Tailwind CSS, DaisyUI und Zustand installiert. Sie werden im aktuellen Anwendungscode nicht verwendet. Vor einer produktionsreifen Version MUSS entschieden werden, ob sie integriert oder aus den Abhängigkeiten entfernt werden.
+Die Produktionsabhängigkeiten sind auf React, React DOM und Lucide React begrenzt. Frühere Abhängigkeiten für Router, Token-Store und CSS-Frameworks wurden entfernt.
 
 ### 5.2 Aktuelle Hauptmodule
 
-- `src/App.tsx`: One-Page-Struktur, Navigation, Projektdaten und große UI-Bereiche.
+- `src/App.tsx`: Komposition der One-Page-Struktur.
 - `src/App.css`: globales Layout, responsive Regeln, Animationen und Komponentenstile.
-- `src/store/tokenStore.ts`: derzeit ungenutzter Store aus einer früheren Token-Studio-Version.
-- `src/lib/applyTokens.ts`: derzeit ungenutzte DOM-Integration aus einer früheren Token-Studio-Version.
-- `src/components/editor/ColorPicker.tsx`: derzeit ungenutzter Editor aus einer früheren Token-Studio-Version.
-- `src/components/ui/Button.tsx`: vorbereitete, derzeit ungenutzte Button-Komponente.
-- `src/components/ui/Badge.tsx`: vorbereitete, derzeit ungenutzte Badge-Komponente.
+- `src/components/layout/IntroScreen.tsx`: anklickbarer Einstieg mit animiertem Namen.
+- `src/components/layout/BackgroundLightTrails.tsx`: wiederverwendete SVG-Polarlichtlinien für Intro und Hauptseite.
+- `src/data/`: typisierte Projekt- und Portfolio-Inhalte.
+- `src/components/`: Layout- und Projektkomponenten.
+- `src/sections/`: klar getrennte Seitenbereiche.
+- `src/test/` und `*.test.tsx`: Test-Setup und Komponententests.
 - `README.md`: projektbezogene Dokumentation mit Setup, Scripts, Struktur, Designrichtung und Deployment-Hinweisen.
 - `AGENTS.md`: Entwicklungsregeln für Junior-Entwickler und AI-Agents.
 - `AUDIT.md`: priorisierte Aufgabenliste für die Fertigstellung.
@@ -125,10 +126,10 @@ Im Projekt sind zusätzlich TanStack Router, Tailwind CSS, DaisyUI und Zustand i
 
 | Bereich | Inhalt |
 | --- | --- |
-| `/` | Startseite mit Hero, Hive-Navigation, ausgewählten Projekten, Profil, Fähigkeiten, Prozess, vollständigem Projektarchiv und Kontakt |
+| `/` | Animierter Intro-Screen; nach Aktivierung folgt die One-Page-Ansicht |
+| `/#home` | Direkter Einstieg in den Hero ohne Intro-Screen |
 | `#works` | Hervorgehobene Projektpräsentation |
-| `#roots` | Profil und Stärken |
-| `#skills` | Portfolio-Highlights |
+| `#about` | Profil, Fähigkeiten und Stärken |
 | `#projects` | Alle Projekte in einer Kartenübersicht |
 | `#connect` | Kontakt und Core Skills |
 
@@ -136,6 +137,7 @@ Im Projekt sind zusätzlich TanStack Router, Tailwind CSS, DaisyUI und Zustand i
 
 ```text
 Razieh.dev
+├── Anklickbarer Intro-Screen
 ├── Globaler Header
 │   ├── Logo / Home-Link
 │   └── Navigation
@@ -143,9 +145,8 @@ Razieh.dev
 │       ├── Projects
 │       └── Contact
 ├── Hero
-├── Hive-Sprungnavigation
 ├── Selected Work
-├── About / Roots
+├── About
 ├── Skills / Highlights
 ├── Process
 ├── Alle Projekte
@@ -156,6 +157,22 @@ Razieh.dev
 ```
 
 ## 7. Funktionale Anforderungen
+
+### 7.0 Intro-Screen
+
+**FR-INTRO-01:** Beim normalen Aufruf MUSS zunächst ein bildschirmfüllender, anklickbarer Portfolio-Intro-Screen erscheinen.
+
+**FR-INTRO-02:** Der Intro-Screen MUSS per Maus, Enter und Leertaste bedienbar sein und danach die One-Page-Ansicht anzeigen.
+
+**FR-INTRO-03:** Direkte Abschnittslinks mit Hash MÜSSEN den Intro-Screen überspringen.
+
+**FR-INTRO-04:** „RAZIEH“ SOLL buchstabenweise von links und „DORRAZAEI“ buchstabenweise von rechts erscheinen. Bei reduzierter Bewegung MUSS der vollständige Name sofort sichtbar sein.
+
+**FR-INTRO-05:** Die Buchstaben SOLLEN nacheinander und bewusst langsam erscheinen. Ihre Farben SOLLEN von warmem Kupfer und Rosé über Violett zu leuchtendem Blau verlaufen.
+
+**FR-INTRO-06:** Der Intro-Screen MUSS denselben textfreien Hintergrund wie die Hauptseite verwenden und SOLL ausschließlich dekorative Polarlichtlinien animieren. Die Code-Symbole des Hero-Bereichs DÜRFEN dort nicht erscheinen.
+
+**FR-INTRO-07:** Name, Rolle und Einstiegsschaltfläche MÜSSEN oberhalb der dekorativen Animation klar lesbar und bedienbar bleiben.
 
 ### 7.1 Globaler Header und Navigation
 
@@ -185,11 +202,7 @@ Razieh.dev
 
 **FR-HOME-03:** Die sekundäre Aktion „Contact Me“ MUSS zum Kontaktbereich im Footer führen.
 
-**FR-HOME-04:** Die Scroll-Hilfe MUSS zur Hive-Navigation führen.
-
-#### Hive-Navigation
-
-**FR-HOME-05:** Die Hive-Navigation MUSS Sprünge zu Works, Roots, Skills, Projects und Kontakt anbieten.
+**FR-HOME-04:** Die Scroll-Hilfe MUSS zum Bereich „Selected Work“ führen.
 
 **FR-HOME-06:** Sprungziele auf derselben Seite MÜSSEN stabile, eindeutige IDs besitzen.
 
@@ -257,7 +270,7 @@ interface Project {
 
 ### 7.5 Entfernte Seiten und frühere Experimente
 
-**FR-OLD-01:** Die frühere Learners-Seite DARF nicht mehr über Header oder Hive-Navigation erreichbar sein.
+**FR-OLD-01:** Die frühere Learners-Seite DARF nicht mehr über die Navigation erreichbar sein.
 
 **FR-OLD-02:** Das frühere Token Studio DARF nicht im aktuellen One-Page-Portfolio angezeigt werden, solange es nicht ausdrücklich wieder als Projektsektion gewünscht ist.
 
@@ -281,7 +294,7 @@ interface Project {
 
 ### 8.1 Visuelle Richtung
 
-Die Oberfläche verwendet eine dunkle, cineastische One-Page-Ästhetik mit warmen Goldtönen und ausgeblendeten violett-blauen-orange Reflexionen im Hintergrund. Das Design soll professionell, eigenständig und ruhig wirken. Dekorative Animationen dürfen Inhalte und Bedienbarkeit nicht überlagern.
+Die Oberfläche verwendet eine dunkle, cineastische One-Page-Ästhetik mit hell leuchtenden Kupfer-, Violett- und Blaureflexionen aus dem Intro-Motiv. Das Design soll professionell, eigenständig und klar wirken. Dunkle transparente Kartenflächen sichern die Lesbarkeit über den kräftigeren Farben. Dekorative Animationen dürfen Inhalte und Bedienbarkeit nicht überlagern.
 
 Der aktuelle Hero zeigt den Slogan:
 
@@ -292,29 +305,36 @@ for the Web
 
 Die Hero-Headline nutzt eine kräftige, verspielte Serif-Anmutung. Längere Fließtexte bleiben in einer gut lesbaren Sans-Serif-Schrift.
 
+Dieses Schriftpaar MUSS konsistent verwendet werden: Name, Brand, große Überschriften, Kartenüberschriften und hervorgehobene Zahlen nutzen den Serif-Stack. Navigation, Buttons, Kontakttexte und Fließtext nutzen den Sans-Serif-Stack. Header und Footer dürfen kein abweichendes drittes Schriftbild einführen.
+
 ### 8.2 Basis-Farbpalette
 
 | Token | Ausgangswert | Verwendung |
 | --- | --- | --- |
-| `--ink` | `#120c08` | Haupthintergrund |
-| `--ink-soft` | `#1d130d` | Sekundäre dunkle Flächen |
-| `--cream` | `#fff7e8` | Primärer Text |
+| `--ink` | `#08060b` | Haupthintergrund |
+| `--ink-soft` | `#14101d` | Sekundäre dunkle Flächen |
+| `--cream` | `#f8ead8` | Primärer Text |
 | `--cream-muted` | teiltransparentes Cream | Sekundärer Text |
-| `--gold` | `#ffde59` | Akzente und primäre Aktionen |
-| `--amber` | `#d99a3d` | Sekundärer Akzent |
-| `--bronze` | `#bb8f0a` | Tiefer Akzent |
+| `--copper` | `#e0a171` | Akzente und primäre Aktionen |
+| `--violet` | `#7047b8` | Violette Reflexionen des Intro-Motivs |
+| `--deep-blue` | `#223b8f` | Blaue Reflexionen des Intro-Motivs |
 | `--font-body` | System-Sans-Stack | Fließtext und UI |
-| `--font-display` | Display-Sans-Stack | große Abschnittsüberschriften |
-| `--font-hero` | Serif-Stack | Hero-Slogan |
-| `--font-signature` | Script-Stack | Brand/Logo |
+| `--font-display` | Georgia-basierter Serif-Stack | Name, Brand und Überschriften |
+| `--font-hero` | Alias auf den Display-Serif-Stack | Hero-Slogan |
 
 ### 8.2.1 Hintergrund und Reflexionen
 
 - Der Seitenhintergrund SOLL dunkel bleiben, damit Inhalt und Projektkarten klar lesbar bleiben.
+- Die Hauptseite SOLL eine textfreie Variante des Intro-Motivs als festen Hintergrund verwenden, damit beide Ansichten dieselbe Farbwelt besitzen.
+- Intro und Hauptseite SOLLEN dasselbe Hintergrundbild und dieselbe SVG-Polarlichtkomponente verwenden.
+- Der Intro-Screen SOLL nur die Polarlichtbewegung zeigen; die schwebenden Code-Symbole gehören ausschließlich zum Hero der Hauptseite.
 - Die Reflexionsfläche SOLL abstrakt sein und kein konkretes Foto oder Laptop-Bild zeigen.
 - Die Reflexionen DÜRFEN violette, blaue und warme orange Lichtfarben nutzen.
-- Die Reflexionen MÜSSEN weichgezeichnet und dezent bleiben.
+- Die Reflexionen MÜSSEN weichgezeichnet bleiben und dürfen während des Scrollens deutlich heller werden.
 - Die Reflexionsschicht KANN per `position: fixed` als subtiler Parallax-Eindruck wirken.
+- Farbige SVG-Lichtsegmente SOLLEN entlang der Wellen laufen und beim Scrollen für ungefähr eine halbe Sekunde mit höherer Helligkeit, Sättigung und Strichstärke reagieren.
+- Die Polarlichtfläche MUSS den gesamten Viewport einschließlich des Header-Bereichs abdecken.
+- Der Header MUSS ausreichend transparent bleiben, damit Hintergrund und Polarlicht visuell ohne harten Bruch weiterlaufen.
 - Die Animation MUSS `prefers-reduced-motion: reduce` respektieren.
 
 ### 8.3 Layout
@@ -334,7 +354,7 @@ Die bestehende Oberfläche verwendet folgende maßgebliche Bereiche:
 | über 980 px | Mehrspaltige Desktop-Layouts |
 | bis 980 px | Große Bereiche werden einspaltig |
 | bis 720 px | Header, Aktionen und Überschriften passen sich an Mobile an |
-| bis 460 px | Minimale Abstände und einspaltige Hive-/Demo-Raster |
+| bis 460 px | Minimale Abstände, kompakte Navigation und einspaltige Karten |
 
 Die Anwendung MUSS mindestens bei 320, 375, 768, 1024 und 1440 px überprüft werden.
 
@@ -358,6 +378,8 @@ Hover darf niemals die einzige Anzeige für Zustand oder Bedeutung sein.
 - Daueranimationen DÜRFEN Inhalte nicht schwer lesbar machen.
 - Scrollen bei Navigation MUSS bei reduzierter Bewegung ohne Smooth-Animation erfolgen.
 - Der Reflexionshintergrund SOLL langsam und subtil animiert sein.
+- Auf der Hauptseite SOLL aktives Scrollen die Polarlichtlinien sichtbar verstärken.
+- Der Intro-Screen SOLL die Polarlichtbewegung ohne Scroll-Interaktion zeigen.
 
 ## 9. Accessibility-Anforderungen
 
@@ -436,44 +458,36 @@ Die Anwendung setzt moderne CSS-Funktionen ein. Für nicht unterstützte Funktio
 - Große Dateien SOLLEN in logisch benannte Module aufgeteilt werden.
 - Unbenutzter Code und unbenutzte Abhängigkeiten SOLLEN entfernt werden.
 
-## 11. Zielarchitektur
+## 11. Aktuelle Architektur
 
-Eine empfohlene zukünftige Struktur ist:
+Die Anwendung verwendet folgende Struktur:
 
 ```text
 src/
-├── app/
-│   └── App.tsx
 ├── components/
 │   ├── layout/
+│   │   ├── BackgroundLightTrails.tsx
+│   │   ├── Footer.tsx
 │   │   ├── Header.tsx
-│   │   └── Footer.tsx
-│   ├── projects/
-│   │   ├── ProjectCard.tsx
-│   │   └── ProjectGrid.tsx
-│   └── ui/
+│   │   └── IntroScreen.tsx
+│   └── projects/
+│       └── ProjectCard.tsx
 ├── data/
 │   ├── projects.ts
 │   └── portfolio.ts
 ├── sections/
 │   ├── HeroSection.tsx
-│   ├── HiveNavigation.tsx
 │   ├── WorksSection.tsx
 │   ├── AboutSection.tsx
+│   ├── PortfolioHighlightsSection.tsx
 │   ├── ProcessSection.tsx
 │   └── ProjectsSection.tsx
-├── lib/
-│   └── utilities.ts
-├── styles/
-│   ├── global.css
-│   ├── tokens.css
-│   └── utilities.css
 ├── test/
 │   └── setup.ts
+├── App.css
+├── App.tsx
 └── main.tsx
 ```
-
-Diese Struktur ist eine Zielrichtung und keine Pflicht zur sofortigen Komplettmigration. Refactoring SOLL schrittweise erfolgen und das bestehende Verhalten erhalten.
 
 ## 12. State Management und Datenfluss
 
@@ -532,9 +546,12 @@ One-Page-Portfolio
 Folgende Befehle MÜSSEN vor einem Release erfolgreich sein:
 
 ```bash
+npm test
 npm run lint
 npm run build
 ```
+
+Stand 22. Juli 2026 umfasst die automatisierte Suite fünf Testdateien mit acht erfolgreichen Tests. Darin sind auch der zugängliche Intro-Einstieg und das Überspringen des Intros bei direkten Hash-Aufrufen abgedeckt.
 
 ### 15.2 Unit-Tests
 
@@ -542,8 +559,7 @@ Mindestens folgende Logik SOLL getestet werden:
 
 - Projektkarten rendern optionale Live- und GitHub-Links korrekt,
 - Projektkarten ohne Links zeigen keine leeren Aktionen,
-- Hive-Navigation enthält nur vorhandene Zielbereiche,
-- zentrale Projektdaten erfüllen das erwartete Datenmodell.
+- zentrale Projektdaten werden vollständig dargestellt.
 
 ### 15.3 Komponenten- und Integrationstests
 
@@ -558,12 +574,14 @@ Mindestens folgende Logik SOLL getestet werden:
 Kritischer Happy Path:
 
 1. Startseite öffnen.
-2. Über „View Projects“ zum Projektbereich springen.
-3. Alle Projektkarten prüfen.
-4. Live- und GitHub-Links prüfen.
-5. Über Header und Hive-Navigation zu den wichtigsten Bereichen springen.
-6. Kontakt- und externe Profil-Links prüfen.
-7. Seite neu laden und sicherstellen, dass die One-Page-Ansicht erhalten bleibt.
+2. Intro-Animation und sofort sichtbaren Inhalt bei reduzierter Bewegung prüfen.
+3. Intro per Maus sowie per Tastatur öffnen.
+4. Über „View Projects“ zum Projektbereich springen.
+5. Alle Projektkarten prüfen.
+6. Live- und GitHub-Links prüfen.
+7. Über den Header zu den wichtigsten Bereichen springen.
+8. Kontakt- und externe Profil-Links prüfen.
+9. Einen direkten Hash-Link neu laden und sicherstellen, dass der Intro-Screen übersprungen wird.
 
 ### 15.5 Manuelle Prüfmatrix
 
@@ -628,6 +646,8 @@ Eine Änderung gilt als abgeschlossen, wenn:
 
 ### Portfolio
 
+- [x] Ein zugänglicher Intro-Screen führt in das Portfolio und direkte Hash-Links überspringen ihn.
+- [x] Intro und Hauptseite verwenden eine gemeinsame Farbwelt und animierte Polarlichtlinien.
 - [ ] Besucher verstehen im ersten sichtbaren Bereich Slogan, Rolle und Schwerpunkt.
 - [ ] Home, Projects und Contact sind zuverlässig per Anker erreichbar.
 - [ ] Browsernavigation und direkter Reload der Startseite funktionieren.
@@ -637,13 +657,15 @@ Eine Änderung gilt als abgeschlossen, wenn:
 
 ### Qualität
 
-- [ ] Es gibt keine TypeScript- oder ESLint-Fehler.
-- [ ] Kernfunktionen besitzen automatisierte Tests.
+- [x] Es gibt keine TypeScript- oder ESLint-Fehler.
+- [x] Kernfunktionen besitzen automatisierte Tests.
 - [ ] Alle Ziel-Viewports funktionieren ohne horizontales Scrollen.
-- [ ] Reduzierte Bewegung wird respektiert.
-- [ ] Unbenutzte Produktionsabhängigkeiten wurden entfernt oder dokumentiert begründet.
+- [x] Reduzierte Bewegung wird respektiert.
+- [x] Header und Footer verwenden dasselbe Schrift-System wie der Hauptinhalt.
+- [x] Unbenutzte Produktionsabhängigkeiten wurden entfernt.
 - [x] Die Projekt-README enthält Installation, Scripts, Architektur und Deployment.
 - [x] Eine `AGENTS.md` mit Entwicklungsregeln für Junior-Entwickler ist vorhanden.
+- [x] Seitentitel, Meta Description, Open-Graph-Basisdaten, Social Preview und Favicon sind vorhanden.
 
 ## 19. Priorisierte Roadmap
 
@@ -653,42 +675,35 @@ Eine Änderung gilt als abgeschlossen, wenn:
 2. Alle internen Anker und Kontaktlinks prüfen.
 3. Zugängliche Labels und Fokuszustände ergänzen.
 4. Reale Projektinhalte von Platzhaltern unterscheiden.
-5. Metadaten auf das One-Page-Portfolio aktualisieren.
+5. Nach Festlegung der öffentlichen URL die kanonische URL und absolute Social-Preview-URL ergänzen.
 
-### Priorität 2: Codequalität
+### Erledigte Codequalität
 
-1. `App.tsx` in Seiten und Komponenten aufteilen.
-2. Projektdaten in ein typisiertes Datenmodul verschieben.
-3. CSS logisch modularisieren.
-4. Unbenutzte Komponenten und Abhängigkeiten bewerten.
-5. Vitest und React Testing Library einführen.
+1. `App.tsx` wurde in Sections und Komponenten aufgeteilt.
+2. Projektdaten wurden in typisierte Datenmodule verschoben.
+3. Ungenutzte Komponenten und Abhängigkeiten wurden entfernt.
+4. Vitest und React Testing Library wurden eingeführt.
 
 ### Priorität 3: Portfolio-Polish
 
-1. README, Spec, Audit und AGENTS.md konsistent halten.
-2. SEO-, Open-Graph- und Favicon-Daten ergänzen.
-3. Projektbilder optimieren und Lazy Loading ergänzen.
-4. Lebenslauf-Link bewusst integrieren.
-5. Optional weitere reale Projektbilder und Projektlinks ergänzen.
+1. Finale Mobile-, Tastatur- und Screenreader-Prüfung durchführen.
+2. Projektbilder künftig in WebP oder AVIF konvertieren.
+3. Hosting-Ziel und öffentliche URL festlegen.
+4. Deployment und Live-Abnahme durchführen.
 
 ## 20. Offene Produktentscheidungen
 
 Vor größeren Änderungen sollten folgende Fragen beantwortet werden:
 
 1. Wird das Portfolio auf einer Root-Domain oder unter einem Unterpfad veröffentlicht?
-2. Soll der vorhandene TanStack Router entfernt werden, da die App aktuell keine Routen mehr nutzt?
-3. Sollen Tailwind CSS und DaisyUI zukünftig eingesetzt oder deinstalliert werden?
-4. Welche Projektkarten repräsentieren reale, veröffentlichte Projekte?
-5. Soll die öffentlich vorhandene CV-PDF wieder sichtbar verlinkt werden?
-6. Bleibt die gesamte Website englisch oder ist Mehrsprachigkeit geplant?
+2. Welche öffentliche URL wird für kanonische und Open-Graph-Metadaten verwendet?
+3. Sind E-Mail und LinkedIn-Profil abschließend als öffentliche Kontaktdaten bestätigt?
 
 ## 21. Bekannte Einschränkungen des aktuellen Stands
 
-- Automatisierte Tests und ein `test`-Script fehlen.
-- Die Hauptkomponente und das zentrale Stylesheet sind für langfristige Wartung sehr groß.
-- Mehrere installierte Bibliotheken sowie vorbereitete UI-/Token-Studio-Komponenten werden nicht verwendet.
-- Projektinhalte und Platzhalterprojekte müssen vor finaler Veröffentlichung noch geprüft werden.
-- Open-Graph-Bild, Favicon und finale Deployment-Konfiguration fehlen noch.
+- Die finale Mobile-, Tastatur- und Screenreader-Abnahme ist noch manuell durchzuführen.
+- Die PNG-Projektbilder sind noch nicht in moderne Bildformate konvertiert.
+- Hosting-Ziel, öffentliche URL und Deployment-Konfiguration sind noch offen.
 
 ## 22. Änderungsprotokoll
 
@@ -697,3 +712,5 @@ Vor größeren Änderungen sollten folgende Fragen beantwortet werden:
 | 1.0 | 15.07.2026 | Erste vollständige Produkt- und technische Spezifikation auf Basis des bestehenden Projekts |
 | 1.1 | 15.07.2026 | Aktualisierung auf One-Page-Portfolio ohne Learners- und Projects-Unterseiten |
 | 1.2 | 16.07.2026 | Aktualisierung auf aktuellen Hero-Slogan, Reflexionshintergrund, README und AGENTS.md |
+| 1.3 | 22.07.2026 | Daten-/Komponenten-Refactor, Tests, Accessibility, SEO, Dependency-Cleanup und Audit-Abgleich |
+| 1.4 | 22.07.2026 | Aktueller Intro-Screen, gemeinsame Serif-/Sans-Typografie, animierte Polarlichtlinien auf beiden Ansichten, Scroll-Verstärkung und nahtloser Header-Hintergrund dokumentiert |

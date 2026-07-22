@@ -1,286 +1,256 @@
-# Audit und Umsetzungsplan: Razieh.dev One-Page-Portfolio
+# Audit und Umsetzungsstand: Razieh.dev One-Page-Portfolio
 
-Stand: 15. Juli 2026
+Stand: 22. Juli 2026
 
-## 1. Endziel
+## Status-Legende
 
-Am Ende soll dein Projekt ein professionelles One-Page-Portfolio sein, das du sicher zeigen und deployen kannst.
+- `[x]` umgesetzt und lokal verifiziert
+- `[ ]` benötigt noch eine Entscheidung, manuelle Prüfung oder ein echtes Deployment
+- „Nicht anwendbar“ bedeutet, dass der Punkt nicht mehr zum aktuellen Produkt gehört
 
-Das finale Ergebnis soll erreichen:
+## Gesamtstand
 
-- Recruiter oder Besucher verstehen sofort, wer du bist und was du kannst.
-- Alle wichtigen Inhalte sind auf einer Seite erreichbar: Hero, Projekte, Skills, Prozess und Kontakt.
-- Es gibt keine extra Learners- oder Projects-Unterseiten mehr.
-- Alle echten Projekte haben klare Beschreibungen, Live-Links, GitHub-Links und Bilder, wenn vorhanden.
-- Die Seite ist auf Mobile, Tablet und Desktop sauber nutzbar.
-- Die Seite ist technisch sauber: Lint, Build, Tests und Deployment funktionieren.
-- Der Code ist wartbar: Daten, Sections und Komponenten sind sinnvoll getrennt.
-- README, Spec und Audit passen zum echten Projekt.
+Die lokale Anwendung ist strukturiert, getestet und produktionsfähig buildbar. Inhalte, Projektdaten und UI sind getrennt. Accessibility- und SEO-Basics sind eingebaut. Offen bleiben hauptsächlich persönliche Bestätigungen, echte Mobile-/Tastaturtests und das Deployment auf einen noch auszuwählenden Host.
 
-## 2. Aktueller Audit-Stand
+Aktuell bestätigt:
 
-### 2.1 Bereits erledigt
-
-- [x] Projekt wurde analysiert.
-- [x] Aus der Mehrseiten-App wurde eine One-Page-Struktur gemacht.
-- [x] Learners-Seite wurde aus der sichtbaren App entfernt.
-- [x] Separate Projects-Seite wurde aus der sichtbaren App entfernt.
-- [x] Header-Navigation zeigt jetzt Home, Projects und Contact.
-- [x] Alle Projekte werden direkt auf der Startseite angezeigt.
-- [x] `npm run lint` läuft erfolgreich.
-- [x] `npm run build` läuft erfolgreich.
-- [x] `spec.md` wurde erstellt.
-- [x] `spec.md` wurde auf One-Page-Portfolio aktualisiert.
-
-### 2.2 Offene Risiken
-
-- [ ] `src/App.tsx` ist noch zu groß und enthält Daten, Layout und Komponenten zusammen.
-- [ ] `src/App.css` ist noch sehr groß und schwer langfristig zu pflegen.
-- [ ] README beschreibt noch stark die Vite-Vorlage statt dein Portfolio.
-- [ ] Automatisierte Tests fehlen.
-- [ ] Es gibt noch installierte, aber aktuell ungenutzte Abhängigkeiten.
-- [ ] Frühere Token-Studio-Dateien liegen noch im Projekt, werden aber nicht mehr in der App genutzt.
-- [ ] Einige Projektkarten wirken noch wie Platzhalter und brauchen echte Inhalte oder klare Kennzeichnung.
-- [ ] SEO-, Open-Graph- und Favicon-Details sollten vor Deployment geprüft werden.
-
-## 3. Reihenfolge der Arbeit
-
-Arbeite diese Reihenfolge von oben nach unten durch. Erst wenn ein Abschnitt fertig ist, solltest du den nächsten starten.
+- [x] `npm test`: 5 Testdateien, 7 Tests erfolgreich
+- [x] `npm run lint`: erfolgreich
+- [x] `npm run build`: erfolgreich
+- [x] `npm audit`: 0 bekannte Schwachstellen
+- [x] Produktions-Preview startet lokal
 
 ## Phase 1: Produktinhalt finalisieren
 
-Ziel: Die Seite soll inhaltlich ehrlich, klar und professionell sein.
+Ziel: Die Seite ist inhaltlich klar, ehrlich und professionell.
 
-- [ ] Prüfen, ob der Name im Hero korrekt und professionell dargestellt ist.
-- [ ] Hero-Text final schreiben: Rolle, Schwerpunkt und Persönlichkeit klar machen.
-- [ ] Entscheiden, ob die Website komplett Englisch bleibt oder Deutsch/Englisch werden soll.
-- [ ] About-Text finalisieren.
-- [ ] Skills-Liste finalisieren.
-- [ ] Core Skills im Footer finalisieren.
-- [ ] Prozess-Schritte finalisieren.
-- [ ] Kontakt-E-Mail prüfen.
-- [ ] LinkedIn-Link prüfen.
-- [ ] GitHub-Link prüfen.
-- [ ] Entscheiden, ob der CV/PDF-Link sichtbar auf die Seite soll.
+- [x] Vollständiger Name und Rolle stehen sichtbar im Hero.
+- [x] Hero-Text beschreibt Schwerpunkt und Arbeitsweise.
+- [x] Die Website bleibt konsistent englisch; `html lang="en"` passt dazu.
+- [x] About-Text wurde final und ohne generische Platzhalter formuliert.
+- [x] Skills-Liste wurde auf den verwendeten und angestrebten Stack abgestimmt.
+- [x] Core Skills im Footer wurden finalisiert.
+- [x] Prozess-Schritte wurden konkretisiert.
+- [ ] Kontakt-E-Mail durch die Eigentümerin persönlich bestätigen.
+- [ ] LinkedIn-Profil im normalen Browser persönlich öffnen; automatisierte Anfrage wird von LinkedIn mit Status 999 blockiert.
+- [x] GitHub-Profil automatisiert mit HTTP 200 geprüft.
+- [x] Vorhandene CV-PDF ist als „Download CV“ sichtbar eingebunden.
+- [x] Das Social-Preview-Bild dient als zugänglicher, per Maus und Tastatur bedienbarer Intro-Screen.
+- [x] Direkte Abschnittslinks überspringen den Intro-Screen.
 
-Abnahme für Phase 1:
+Abnahme:
 
-- [ ] Eine fremde Person versteht in 10 Sekunden, wer du bist.
-- [ ] Keine Texte wirken wie Platzhalter.
-- [ ] Alle Kontaktinformationen sind korrekt.
+- [x] Name, Rolle und Schwerpunkt sind im ersten sichtbaren Bereich vorhanden.
+- [x] Lernprojekte sind nicht als veröffentlichte Produkte formuliert.
+- [ ] E-Mail und LinkedIn abschließend persönlich bestätigen.
 
 ## Phase 2: Projekte bereinigen
 
-Ziel: Alle Projekte auf der Seite sollen entweder echte Projekte sein oder klar als Übungs-/Konzeptprojekte erkennbar sein.
+Ziel: Jede Projektkarte beschreibt ihren tatsächlichen Status.
 
-- [ ] Alle aktuellen Projektkarten durchgehen.
-- [ ] Für jedes Projekt entscheiden: echt veröffentlicht, GitHub-only, Übung oder Platzhalter.
-- [ ] Lifestyle Quiz Live-Link testen.
-- [ ] Lifestyle Quiz GitHub-Link testen.
-- [ ] Für Responsive Portfolio echten Link ergänzen oder Text als Konzept/Portfolio-Projekt anpassen.
-- [x] Design Token Studio als Projektkarte durch Glow Shop ersetzen.
-- [ ] Für Full Stack Practice App echten GitHub-Link ergänzen oder Text als Lernprojekt kennzeichnen.
-- [ ] Für Dashboard Cards echten GitHub-Link ergänzen oder Text als UI-Experiment kennzeichnen.
-- [ ] Projektbilder ergänzen, wo echte Screenshots vorhanden sind.
-- [ ] Alt-Texte für Projektbilder prüfen.
-- [ ] Karten ohne Live-Link dürfen keinen Live-Button zeigen.
-- [ ] Karten ohne GitHub-Link dürfen keinen GitHub-Button zeigen.
+- [x] Alle fünf aktuellen Projektkarten geprüft.
+- [x] Projektstatus ist typisiert: `published`, `github` oder `learning`.
+- [x] Lifestyle Quiz Live- und GitHub-Link: HTTP 200.
+- [x] Glowify Live- und GitHub-Link: HTTP 200.
+- [x] AutoFlow Live- und GitHub-Link: HTTP 200.
+- [x] Raaji Baluch Blog GitHub-Link: HTTP 200.
+- [x] Full Stack Practice App ist ausdrücklich als unveröffentlichtes Lernprojekt gekennzeichnet.
+- [x] „Responsive Portfolio“ ist nicht im aktuellen Datenbestand; alter Audit-Punkt ist nicht anwendbar.
+- [x] „Dashboard Cards“ ist nicht im aktuellen Datenbestand; alter Audit-Punkt ist nicht anwendbar.
+- [x] Vorhandene Screenshots sind eingebunden.
+- [x] Jeder Projekt-Screenshot besitzt einen konkreten Alt-Text.
+- [x] Live- und GitHub-Aktionen werden nur bei vorhandener URL gerendert.
+- [x] Vier echte Arbeiten werden über ein explizites `featured`-Feld hervorgehoben.
 
-Abnahme für Phase 2:
+Abnahme:
 
-- [ ] Jede Projektkarte ist wahr, verständlich und nicht irreführend.
-- [ ] Externe Projektlinks funktionieren.
-- [ ] Mindestens ein starkes echtes Projekt ist prominent sichtbar.
+- [x] Jede Karte ist als veröffentlicht, Source-only oder Lernprojekt erkennbar.
+- [x] Alle eingetragenen Projektlinks antworteten bei der Prüfung mit HTTP 200.
+- [x] Mehrere echte Projekte sind prominent sichtbar.
 
 ## Phase 3: Struktur und Codequalität
 
-Ziel: Der Code soll leichter wartbar werden.
+Ziel: Daten, Komponenten und Sections haben klare Aufgaben.
 
-- [ ] `projects` aus `src/App.tsx` in `src/data/projects.ts` verschieben.
-- [ ] Skills, Stats, Strengths, Process und Contact Links in `src/data/portfolio.ts` verschieben.
-- [ ] `ProjectCard` in `src/components/projects/ProjectCard.tsx` verschieben.
-- [ ] `Footer` in `src/components/layout/Footer.tsx` verschieben.
-- [ ] Header in `src/components/layout/Header.tsx` verschieben.
-- [ ] Hero in `src/sections/HeroSection.tsx` verschieben.
-- [ ] Hive-Navigation in `src/sections/HiveNavigation.tsx` verschieben.
-- [ ] Works-Bereich in `src/sections/WorksSection.tsx` verschieben.
-- [ ] About-Bereich in `src/sections/AboutSection.tsx` verschieben.
-- [ ] Process-Bereich in `src/sections/ProcessSection.tsx` verschieben.
-- [ ] Projects-Bereich in `src/sections/ProjectsSection.tsx` verschieben.
-- [ ] Nach jedem größeren Refactor `npm run lint` ausführen.
-- [ ] Nach jedem größeren Refactor `npm run build` ausführen.
+- [x] Projekte liegen in `src/data/projects.ts`.
+- [x] Skills, Stats, Strengths, Prozess und Kontakte liegen in `src/data/portfolio.ts`.
+- [x] `ProjectCard` liegt in `src/components/projects/ProjectCard.tsx`.
+- [x] `Header` und `Footer` liegen in `src/components/layout/`.
+- [x] Hero, Works, About, Highlights, Process und Projects liegen in `src/sections/`.
+- [x] Hive-Navigation wurde bewusst nicht ergänzt; sie gehört nicht mehr zur aktuellen One-Page-Navigation.
+- [x] Props und Datenmodelle sind ohne `any` typisiert.
+- [x] Projekte verwenden stabile IDs statt Titel als React-Key.
+- [x] Lint und Build wurden nach dem Refactor erfolgreich ausgeführt.
 
-Abnahme für Phase 3:
+Abnahme:
 
-- [ ] `App.tsx` ist nur noch die Komposition der Seite.
-- [ ] Daten liegen nicht mehr direkt in `App.tsx`.
-- [ ] Jede Komponente hat eine klare Aufgabe.
-- [ ] Lint und Build sind grün.
+- [x] `App.tsx` enthält nur noch Seitenkomposition und Datenübergabe.
+- [x] Statische Inhalte liegen nicht mehr direkt in `App.tsx`.
+- [x] Jede Komponente hat eine begrenzte Aufgabe.
+- [x] Lint und Build sind grün.
 
-## Phase 4: CSS aufräumen
+## Phase 4: CSS und Responsive-Verhalten
 
-Ziel: Das Styling soll übersichtlicher und robuster werden.
+Ziel: Styling ist robust, zugänglich und ohne tote Regeln.
 
-- [ ] Ungenutzte CSS-Klassen suchen.
-- [ ] Alte Klassen wie frühere Token-Studio- oder Page-Styles entfernen, falls noch vorhanden.
-- [ ] CSS in logische Bereiche strukturieren.
-- [ ] Optional CSS-Dateien aufteilen: `global.css`, `layout.css`, `sections.css`, `components.css`.
-- [ ] Mobile Header prüfen.
-- [ ] Projektkarten auf 320 px Breite prüfen.
-- [ ] Lange Wörter und lange Links auf Mobile prüfen.
-- [ ] Fokuszustände für Links und Buttons prüfen.
-- [ ] `prefers-reduced-motion` prüfen.
+- [x] CSS-Klassen gegen alle TSX-Dateien abgeglichen.
+- [x] Ungenutzte Regeln wie `card-title`, `about-card` und `button--wide` entfernt.
+- [x] Token-Studio-Styles sind nicht mehr vorhanden.
+- [x] CSS folgt einer nachvollziehbaren Reihenfolge von globalen Regeln über Sections bis Responsive/Motion.
+- [x] Mobile Header nutzt drei gleich breite Navigationsspalten.
+- [x] Lange Links nutzen `overflow-wrap: anywhere`.
+- [x] Links und Buttons besitzen sichtbare `:focus-visible`-Styles.
+- [x] Wichtige Links und Buttons besitzen mindestens 44 px Höhe.
+- [x] `prefers-reduced-motion: reduce` deaktiviert praktisch alle Animationen und Smooth Scrolling.
+- [x] Browser-Layout bei 320, 375, 768, 1024 und 1440 CSS-Pixeln ohne horizontale Überbreite geprüft.
+- [x] Hero bei 768, 1024 und 1440 px visuell geprüft.
+- [ ] 320 und 375 px zusätzlich in einem normalen Browser oder auf einem Mobilgerät visuell prüfen.
+- [ ] Ganze Seite bei allen Viewports bis zum Footer visuell prüfen; die bisherigen Screenshots decken den ersten Viewport ab.
 
-Abnahme für Phase 4:
+Abnahme:
 
-- [ ] Keine offensichtlich ungenutzten CSS-Blöcke bleiben übrig.
-- [ ] Layout funktioniert bei 320, 375, 768, 1024 und 1440 px.
-- [ ] Keine Texte laufen aus Karten oder Buttons heraus.
+- [x] Keine offensichtlich ungenutzten CSS-Blöcke gefunden.
+- [x] Technische Viewport-Matrix 320, 375, 768, 1024 und 1440 ohne horizontales Überlaufen bestätigt.
+- [ ] Vollständige visuelle Matrix manuell abschließen.
+- [x] CSS enthält Schutz für lange Links und schmale Karten.
 
-## Phase 5: Aufräumen von alten Dateien und Dependencies
+## Phase 5: Alte Dateien und Dependencies
 
-Ziel: Das Projekt soll nur enthalten, was du wirklich brauchst.
+Ziel: Das aktive Projekt enthält nur verwendete Features.
 
-- [ ] Entscheiden, ob Token-Studio-Code endgültig entfernt wird.
-- [ ] Wenn ja: `src/store/tokenStore.ts` entfernen.
-- [ ] Wenn ja: `src/lib/applyTokens.ts` entfernen.
-- [ ] Wenn ja: `src/components/editor/ColorPicker.tsx` entfernen.
-- [ ] Prüfen, ob `zustand` noch gebraucht wird.
-- [ ] Prüfen, ob `@tanstack/react-router` noch gebraucht wird.
-- [ ] Prüfen, ob Tailwind CSS noch gebraucht wird.
-- [ ] Prüfen, ob DaisyUI noch gebraucht wird.
-- [ ] Ungenutzte Dependencies aus `package.json` entfernen.
-- [ ] Danach `npm install` ausführen, damit `package-lock.json` passt.
-- [ ] Danach `npm run lint` ausführen.
-- [ ] Danach `npm run build` ausführen.
+- [x] Token-Studio-Code wurde als nicht mehr benötigt bewertet und entfernt.
+- [x] `tokenStore.ts`, `applyTokens.ts`, `ColorPicker.tsx`, altes `Badge.tsx` und altes `Button.tsx` entfernt.
+- [x] Leere `src/index.css` entfernt.
+- [x] Zustand, TanStack Router, Tailwind CSS und DaisyUI entfernt.
+- [x] `package.json` und `package-lock.json` über npm aktualisiert.
+- [x] Paketname auf `razieh-portfolio` aktualisiert.
+- [x] Danach Tests, Lint und Build erfolgreich ausgeführt.
+- [x] `npm audit` meldet 0 Schwachstellen.
 
-Abnahme für Phase 5:
+Abnahme:
 
-- [ ] Keine alten, ungenutzten Feature-Dateien bleiben im aktiven Projekt.
-- [ ] `package.json` enthält nur sinnvolle Dependencies.
-- [ ] Build bleibt erfolgreich.
+- [x] Keine alten Feature-Dateien bleiben im aktiven `src`-Verzeichnis.
+- [x] Produktionsabhängigkeiten sind React, React DOM und Lucide React.
+- [x] Build bleibt erfolgreich.
 
 ## Phase 6: Accessibility
 
-Ziel: Die Seite soll gut per Tastatur, Screenreader und Touch bedienbar sein.
+Ziel: Sinnvolle Struktur für Tastatur, Screenreader und Touch.
 
-- [ ] `html lang="en"` prüfen oder an Website-Sprache anpassen.
-- [ ] Genau eine sichtbare Hauptüberschrift (`h1`) prüfen.
-- [ ] Überschriftenreihenfolge prüfen.
-- [ ] Alle Bilder brauchen sinnvolle Alt-Texte.
-- [ ] Dekorative Elemente brauchen `aria-hidden`, wenn nötig.
-- [ ] Header-Navigation braucht klare Linktexte.
-- [ ] Fokuszustände müssen sichtbar sein.
-- [ ] Tastatur-Reihenfolge prüfen.
-- [ ] Touch-Ziele auf Mobile prüfen.
-- [ ] Externe Links mit `target="_blank"` brauchen `rel="noreferrer"` oder `rel="noopener noreferrer"`.
-- [ ] Ankerziele müssen vorhandene IDs besitzen.
+- [x] Dokumentensprache ist Englisch.
+- [x] Genau eine sichtbare Hauptüberschrift (`h1`) vorhanden.
+- [x] Überschriftenhierarchie verwendet `h1`, Section-`h2` und Card-`h3`.
+- [x] Alle Projektbilder besitzen spezifische Alt-Texte.
+- [x] Dekorative Code-, Linien-, Nummern- und Pfeilelemente sind für Screenreader verborgen.
+- [x] Header-Navigation besitzt klare Linktexte und ein Label.
+- [x] Skip-Link zum fokussierbaren Hauptinhalt ergänzt.
+- [x] Globale sichtbare Fokuszustände ergänzt.
+- [x] Touch-Ziele wichtiger Navigationen und Aktionen auf mindestens 44 px erweitert.
+- [x] Externe Links verwenden `noopener noreferrer`.
+- [x] Alle internen Anker verweisen auf vorhandene IDs.
+- [ ] Vollständige Tab-Reihenfolge und Bedienung mit Tastatur manuell prüfen.
+- [ ] Kurzen Screenreader-Smoke-Test durchführen.
 
-Abnahme für Phase 6:
+Abnahme:
 
-- [ ] Die Seite ist komplett per Tastatur nutzbar.
-- [ ] Fokus ist sichtbar.
-- [ ] Screenreader bekommen sinnvolle Namen und Bereiche.
+- [ ] Vollständige Tastaturbedienung manuell bestätigt.
+- [x] Fokusdarstellung ist im CSS eindeutig sichtbar.
+- [x] Bereiche besitzen Überschriften oder zugängliche Namen.
 
 ## Phase 7: SEO und Präsentation
 
-Ziel: Die Seite soll gut aussehen, wenn sie geteilt oder gefunden wird.
+Ziel: Professionelle Browser- und Social-Darstellung.
 
-- [ ] `index.html` Titel finalisieren.
-- [ ] Meta Description finalisieren.
-- [ ] Favicon ergänzen oder prüfen.
-- [ ] Open-Graph-Titel ergänzen.
-- [ ] Open-Graph-Description ergänzen.
-- [ ] Open-Graph-Bild ergänzen.
-- [ ] GitHub-Repository-Beschreibung aktualisieren.
-- [ ] README komplett neu für dieses Portfolio schreiben.
-- [ ] Screenshot oder kurze Projektbeschreibung in README ergänzen.
-- [ ] Installations- und Startbefehle in README ergänzen.
-- [ ] Deployment-Hinweise in README ergänzen.
+- [x] Dokumenttitel und Meta Description finalisiert.
+- [x] Eigenes SVG-Favicon ergänzt.
+- [x] Open-Graph-Titel, Description, Bildabmessungen und Alt-Text ergänzt.
+- [x] Twitter Large Image Card ergänzt.
+- [x] Eigenes Social-Preview-Bild unter `public/social-preview.png` erstellt.
+- [x] README vollständig auf den aktuellen Projektstand aktualisiert.
+- [x] Screenshot/Social Preview, Installation, Scripts, Struktur und Deployment-Hinweise dokumentiert.
+- [ ] Nach Festlegung der Live-Domain absolute `og:url` und kanonische URL ergänzen.
+- [ ] GitHub-Repository-Beschreibung außerhalb des Codes aktualisieren.
 
-Abnahme für Phase 7:
+Abnahme:
 
-- [ ] Browser-Tab zeigt einen professionellen Titel.
-- [ ] README erklärt dein echtes Projekt.
-- [ ] Social Preview wirkt professionell.
+- [x] Browser-Tab zeigt einen professionellen Titel und ein Favicon.
+- [x] README beschreibt die echte Anwendung.
+- [x] Social-Preview-Asset und Metadaten sind lokal vorhanden.
+- [ ] Social Preview nach dem Deployment mit einem Sharing-Debugger prüfen.
 
-## Phase 8: Tests einführen
+## Phase 8: Automatisierte Tests
 
-Ziel: Wichtige Funktionen sollen automatisch überprüfbar sein.
+Ziel: Zentrale Portfolio-Funktionen sind regressionssicher.
 
-- [ ] Test-Framework auswählen: empfohlen Vitest + React Testing Library.
-- [ ] Test-Dependencies installieren.
-- [ ] `npm test` Script ergänzen.
-- [ ] Test für Header-Links schreiben.
-- [ ] Test für Projektkarten mit und ohne Links schreiben.
-- [ ] Test für vollständige Projektliste schreiben.
-- [ ] Test für Footer-Kontaktlinks schreiben.
-- [ ] Optional E2E-Test mit Playwright ergänzen.
-- [ ] `npm test` ausführen.
-- [ ] `npm run lint` ausführen.
-- [ ] `npm run build` ausführen.
+- [x] Vitest, React Testing Library, jest-dom und jsdom installiert.
+- [x] `npm test` und `npm run test:watch` ergänzt.
+- [x] Test-Setup mit DOM-Cleanup eingerichtet.
+- [x] Header-Anker werden getestet.
+- [x] Projektkarten mit und ohne Links werden getestet.
+- [x] Die vollständige zentrale Projektliste wird getestet.
+- [x] Footer-Kontakte und CV-Download werden getestet.
+- [x] Direkte Ankeraufrufe nach dem React-Render werden getestet.
+- [x] `npm test`, Lint und Build erfolgreich.
+- [ ] Optionaler End-to-End-Test mit Playwright wurde bewusst noch nicht ergänzt.
 
-Abnahme für Phase 8:
+Abnahme:
 
-- [ ] `npm test` läuft erfolgreich.
-- [ ] Wichtige Portfolio-Funktionen sind durch Tests abgedeckt.
+- [x] 5 Testdateien und 7 Tests laufen erfolgreich.
+- [x] Navigation, Projektaktionen, Projektliste und Kontakte sind abgedeckt.
 
 ## Phase 9: Deployment vorbereiten
 
-Ziel: Die Seite kann sicher veröffentlicht werden.
+Ziel: Die Seite kann auf dem gewählten Host veröffentlicht werden.
 
 - [ ] Hosting-Ziel festlegen: GitHub Pages, Netlify, Vercel oder anderer Anbieter.
-- [ ] Prüfen, ob die Seite unter Root-Domain oder Unterpfad läuft.
-- [ ] Vite `base` konfigurieren, falls Unterpfad nötig ist.
-- [ ] Asset-Pfade prüfen.
-- [ ] `npm run build` ausführen.
-- [ ] `npm run preview` lokal prüfen.
-- [ ] Mobile Darstellung im Preview prüfen.
-- [ ] Externe Links im Preview prüfen.
+- [ ] Root-Domain oder Unterpfad festlegen.
+- [ ] Falls Unterpfad: Vite-`base` auf den finalen Pfad setzen.
+- [x] Komponenten verwenden `import.meta.env.BASE_URL` für öffentliche Bilder und CV.
+- [x] Favicon und Social Preview verwenden Vites `%BASE_URL%`.
+- [x] Produktions-Build erfolgreich.
+- [x] Produktions-Preview startet lokal.
+- [x] Projekt- und GitHub-Links im Preview-Datenstand geprüft.
+- [ ] Mobile Preview auf echtem Gerät prüfen.
 - [ ] Deployment durchführen.
-- [ ] Live-URL öffnen.
-- [ ] Live-Seite auf Mobile prüfen.
-- [ ] Live-Seite im README ergänzen.
+- [ ] Live-URL, Live-Links und Mobile-Darstellung prüfen.
+- [ ] Live-URL in README und Social-Metadaten ergänzen.
 
-Abnahme für Phase 9:
+Abnahme:
 
-- [ ] Die veröffentlichte Seite ist erreichbar.
-- [ ] Alle Links funktionieren live.
-- [ ] Mobile Darstellung ist live sauber.
+- [ ] Veröffentlichung ist erst nach Wahl eines Hosts möglich.
+- [ ] Alle Live-Prüfungen bleiben bis dahin offen.
 
 ## Phase 10: Finale Abnahme
 
-Ziel: Entscheiden, ob das Portfolio bereit zum Teilen ist.
+- [x] `npm run lint` erfolgreich.
+- [x] `npm run build` erfolgreich.
+- [x] `npm test` erfolgreich.
+- [x] Alle eingetragenen Projekt- und GitHub-Links antworten mit HTTP 200.
+- [x] Lernprojekt ist klar gekennzeichnet; keine irreführenden leeren Buttons.
+- [x] Keine sichtbaren Learners- oder Token-Studio-Seiten.
+- [x] Keine unnötigen Produktionsabhängigkeiten.
+- [x] README und AUDIT entsprechen dem aktuellen Code.
+- [x] `spec.md` wurde auf Architektur, Tests, Navigation und verbleibende Einschränkungen aktualisiert.
+- [ ] E-Mail und LinkedIn persönlich bestätigen.
+- [ ] Tastatur-, Screenreader- und echte Mobile-Abnahme durchführen.
+- [ ] Deployment und Live-Abnahme durchführen.
 
-- [ ] `npm run lint` erfolgreich.
-- [ ] `npm run build` erfolgreich.
-- [ ] `npm test` erfolgreich, falls Tests eingeführt wurden.
-- [ ] Keine falschen oder kaputten Projektlinks.
-- [ ] Keine Platzhaltertexte.
-- [ ] Keine sichtbaren alten Learners- oder Token-Studio-Seiten.
-- [ ] Keine unnötigen Dependencies.
-- [ ] README ist aktuell.
-- [ ] `spec.md` ist aktuell.
-- [ ] `AUDIT.md` ist aktuell.
-- [ ] Live-Seite wurde auf Desktop geprüft.
-- [ ] Live-Seite wurde auf Mobile geprüft.
-- [ ] Portfolio-Link kann in Bewerbungen, LinkedIn oder GitHub-Profil verwendet werden.
+## Definition of Done
 
-## 4. Definition of Done
-
-Das Projekt ist fertig, wenn alle folgenden Punkte abgehakt sind:
-
-- [ ] Inhalt ist final.
-- [ ] Projekte sind echt, korrekt und verlinkt.
-- [ ] Code ist sinnvoll strukturiert.
-- [ ] CSS ist aufgeräumt.
-- [ ] Accessibility-Basics sind erfüllt.
-- [ ] SEO- und README-Basics sind erledigt.
-- [ ] Lint ist grün.
-- [ ] Build ist grün.
-- [ ] Tests sind vorhanden oder bewusst für später dokumentiert.
+- [ ] Inhalt ist nach persönlicher Kontaktprüfung final.
+- [x] Projekte sind korrekt kategorisiert und vorhandene Links geprüft.
+- [x] Code ist sinnvoll strukturiert.
+- [x] CSS ist bereinigt und responsive vorbereitet.
+- [x] Accessibility-Basics sind implementiert.
+- [x] SEO-, Social- und README-Basics sind implementiert.
+- [x] Lint, Build und Tests sind grün.
 - [ ] Deployment ist erfolgreich.
 
-## 5. Empfohlene nächste Aufgabe
+## Nächster manueller Schritt
 
-Als nächstes solltest du Phase 1 und Phase 2 machen. Ohne klare Inhalte und echte Projektkarten wirkt auch der beste Code noch unfertig. Danach lohnt sich der technische Refactor.
+1. Seite mit `npm run dev` öffnen.
+2. E-Mail und LinkedIn-Link persönlich bestätigen.
+3. Bei 320 und 375 px die gesamte Seite bis zum Footer prüfen.
+4. Alle Links und den Skip-Link ausschließlich per Tastatur bedienen.
+5. Hosting-Ziel und öffentliche URL festlegen.
+6. Danach deployen und die letzten offenen Häkchen in diesem Dokument abschließen.

@@ -347,16 +347,16 @@ Tests liegen neben den getesteten Komponenten und Sections. Refactor nur, wenn e
 
 Vor dem Abschluss einer Aufgabe:
 
-- [ ] Aufgabe verstanden und umgesetzt
-- [ ] nur notwendige Dateien geändert
-- [ ] keine offensichtlichen Platzhalter eingeführt
-- [ ] responsive Verhalten grob geprüft
-- [ ] Accessibility nicht verschlechtert
-- [ ] Animationen und `prefers-reduced-motion` geprüft, falls Motion betroffen ist
-- [ ] `npm test` erfolgreich
-- [ ] `npm run lint` erfolgreich
-- [ ] `npm run build` erfolgreich
-- [ ] Änderungen kurz erklärt
+- [x] Aufgabe verstanden und umgesetzt
+- [x] nur notwendige Dateien geändert
+- [x] keine offensichtlichen Platzhalter eingeführt
+- [x] responsive Verhalten grob geprüft
+- [x] Accessibility nicht verschlechtert
+- [x] Animationen und `prefers-reduced-motion` geprüft, falls Motion betroffen ist
+- [x] `npm test` erfolgreich
+- [x] `npm run lint` erfolgreich
+- [x] `npm run build` erfolgreich
+- [x] Änderungen kurz erklärt
 
 ## Commit-Regeln
 

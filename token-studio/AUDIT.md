@@ -10,7 +10,7 @@ Stand: 24. Juli 2026
 
 ## Gesamtstand
 
-Die lokale Anwendung ist strukturiert, getestet und produktionsfähig buildbar. Inhalte, Projektdaten und UI sind getrennt. Accessibility- und SEO-Basics sind eingebaut. Offen bleiben hauptsächlich persönliche Bestätigungen, echte Mobile-/Tastaturtests und das Deployment auf einen noch auszuwählenden Host.
+Die lokale Anwendung ist strukturiert, getestet und produktionsfähig buildbar. Inhalte, Projektdaten und UI sind getrennt. Accessibility- und SEO-Basics sind eingebaut. GitHub Pages ist als Hosting-Ziel festgelegt und das automatische Deployment ist konfiguriert. Offen bleiben hauptsächlich persönliche Bestätigungen, echte Mobile-/Tastaturtests und die Live-Abnahme.
 
 Aktuell bestätigt:
 
@@ -175,7 +175,7 @@ Ziel: Professionelle Browser- und Social-Darstellung.
 - [x] Eigenes Social-Preview-Bild unter `public/social-preview.png` erstellt.
 - [x] README auf Holo Mini, den aktuellen Projektbestand, die Selected-Work-Reihenfolge und die neue CV aktualisiert.
 - [x] Screenshot/Social Preview, Installation, Scripts, Struktur und Deployment-Hinweise dokumentiert.
-- [ ] Nach Festlegung der Live-Domain absolute `og:url` und kanonische URL ergänzen.
+- [x] Absolute `og:url`, Social-Preview-URL und kanonische GitHub-Pages-URL ergänzt.
 - [ ] GitHub-Repository-Beschreibung außerhalb des Codes aktualisieren.
 
 Abnahme:
@@ -210,11 +210,12 @@ Abnahme:
 
 Ziel: Die Seite kann auf dem gewählten Host veröffentlicht werden.
 
-- [ ] Hosting-Ziel festlegen: GitHub Pages, Netlify, Vercel oder anderer Anbieter.
-- [ ] Root-Domain oder Unterpfad festlegen.
-- [ ] Falls Unterpfad: Vite-`base` auf den finalen Pfad setzen.
+- [x] GitHub Pages als Hosting-Ziel festgelegt.
+- [x] Öffentliche URL `https://razidorra.github.io/Portfolio/` und Unterpfad `/Portfolio/` festgelegt.
+- [x] Vite-`base` auf `/Portfolio/` gesetzt.
 - [x] Komponenten verwenden `import.meta.env.BASE_URL` für öffentliche Bilder und CV.
-- [x] Favicon und Social Preview verwenden Vites `%BASE_URL%`.
+- [x] Favicon verwendet Vites `%BASE_URL%`; die Social Preview besitzt eine absolute Produktions-URL.
+- [x] GitHub-Actions-Workflow installiert Abhängigkeiten, baut `token-studio` und veröffentlicht `dist`.
 - [x] Produktions-Build erfolgreich.
 - [x] Produktions-Preview startet lokal.
 - [x] Root-Aufruf, direkter Hash-Aufruf, Holo-Mini-Bild und CV antworten in der Produktionsvorschau mit HTTP 200.
@@ -222,12 +223,12 @@ Ziel: Die Seite kann auf dem gewählten Host veröffentlicht werden.
 - [ ] Mobile Preview auf echtem Gerät prüfen.
 - [ ] Deployment durchführen.
 - [ ] Live-URL, Live-Links und Mobile-Darstellung prüfen.
-- [ ] Live-URL in README und Social-Metadaten ergänzen.
+- [x] Live-URL in README und Social-Metadaten ergänzt.
 
 Abnahme:
 
-- [ ] Veröffentlichung ist erst nach Wahl eines Hosts möglich.
-- [ ] Alle Live-Prüfungen bleiben bis dahin offen.
+- [x] Hosting-Konfiguration und automatischer Veröffentlichungsweg sind vorhanden.
+- [ ] Live-Prüfungen bleiben bis zum erfolgreichen ersten Workflow-Lauf offen.
 
 ## Phase 10: Finale Abnahme
 
@@ -261,5 +262,5 @@ Abnahme:
 2. Alle Links und den Skip-Link ausschließlich per Tastatur bedienen.
 3. Einen kurzen Screenreader-Smoke-Test durchführen.
 4. Die Seite auf einem echten Mobilgerät prüfen.
-5. Hosting-Ziel und öffentliche URL festlegen.
-6. Danach deployen und die letzten offenen Häkchen in diesem Dokument abschließen.
+5. Den ersten GitHub-Pages-Workflow und die öffentliche URL prüfen.
+6. Danach die letzten offenen Live-Häkchen in diesem Dokument abschließen.

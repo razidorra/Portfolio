@@ -28,6 +28,7 @@ Der aktuelle Produktstand umfasst:
 - ein vollständiges Projektarchiv mit Lifestyle Quiz, Glowify, AutoFlow Workshop, Holo Mini und Raaji Baluch Blog
 - Holo Mini mit eigenem Screenshot sowie funktionierendem Live- und GitHub-Link
 - einen öffentlich freigegebenen, dreiseitigen Lebenslauf über „Download CV“
+- ein automatisches GitHub-Pages-Deployment aus `token-studio/dist` mit dem Basispfad `/Portfolio/`
 
 Wichtig: Der Anwendungscode wird in TypeScript geschrieben. Neue React-Dateien sollen `.tsx` verwenden, reine Hilfsdateien sollen `.ts` verwenden. Für App-Code sollen keine neuen `.js`- oder `.jsx`-Dateien angelegt werden.
 
@@ -41,6 +42,8 @@ npm test
 npm run lint
 npm run build
 ```
+
+Das Portfolio wird über den Workflow `.github/workflows/deploy-pages.yml` veröffentlicht. Änderungen am Basispfad `/Portfolio/`, am Repository-Namen oder an der öffentlichen URL müssen gemeinsam in `vite.config.ts`, den Social-Metadaten und der Deployment-Dokumentation aktualisiert werden.
 
 Vor jedem Commit sollten mindestens diese Befehle erfolgreich sein:
 

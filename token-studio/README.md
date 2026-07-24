@@ -91,15 +91,19 @@ Add or update projects in `src/data/projects.ts`. Optional images belong in `pub
 
 ## Deployment
 
-Create the production output in `dist/`:
+The portfolio is configured for GitHub Pages at:
+
+[https://razidorra.github.io/Portfolio/](https://razidorra.github.io/Portfolio/)
+
+Every push to `main` that changes the app or deployment workflow triggers `.github/workflows/deploy-pages.yml`. GitHub Actions installs the locked dependencies, runs the production build from `token-studio/`, uploads `dist/`, and deploys that artifact to GitHub Pages.
+
+Vite uses the repository base path `/Portfolio/`. Public images, the CV, favicon, JavaScript, and CSS therefore resolve correctly below the GitHub Pages project URL. To verify the same output locally:
 
 ```bash
+npm ci
 npm run build
+npm run preview
 ```
-
-The app can be deployed to GitHub Pages, Netlify, Vercel, or another static host. It currently uses Vite's default root base (`/`). If the final host serves the site under a repository subpath, set `base` in `vite.config.ts` before deployment. Public image and CV URLs already use `import.meta.env.BASE_URL`.
-
-The final public URL is intentionally not documented yet because the hosting target has not been selected.
 
 ## Accessibility and responsive checks
 

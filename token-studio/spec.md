@@ -6,7 +6,7 @@
 | --- | --- |
 | Projektname | Razieh.dev |
 | Dokumenttyp | Produkt- und technische Spezifikation |
-| Version | 1.5 |
+| Version | 1.6 |
 | Stand | 24. Juli 2026 |
 | Status | Aktualisierte Beschreibung des implementierten Produkts mit Zielanforderungen für die Weiterentwicklung |
 | Primäre Sprache der Website | Englisch |
@@ -61,7 +61,8 @@ Das Produkt soll Besucherinnen und Besuchern innerhalb weniger Sekunden beantwor
 - Fehlerfreier TypeScript-Produktions-Build.
 - Fehlerfreier ESLint-Durchlauf.
 - Zuverlässige Anker-Navigation innerhalb der Startseite.
-- Hosting-unabhängige Behandlung von statischen Assets.
+- Korrekte Behandlung statischer Assets unter dem GitHub-Pages-Unterpfad `/Portfolio/`.
+- Automatisierter Build und Release über GitHub Actions.
 - Automatisierte Tests für zentrale Benutzerabläufe.
 - Klare Trennung von Layout, UI-Komponenten und Daten.
 
@@ -630,16 +631,24 @@ npm run build
 
 Das veröffentlichte Artefakt liegt standardmäßig in `dist/`.
 
-### 16.2 Base Path und Anker
+### 16.2 Hosting, Base Path und Anker
 
-Vor dem Deployment MUSS die Hosting-Variante feststehen:
+Das Portfolio wird als GitHub-Pages-Projektseite unter `https://razidorra.github.io/Portfolio/` veröffentlicht. Vite MUSS deshalb den Basispfad `/Portfolio/` verwenden. Interne Asset-URLs verwenden `import.meta.env.BASE_URL` oder Vites `%BASE_URL%`; absolute Social-Metadaten verweisen auf die öffentliche Pages-URL.
 
-- Root-Domain, beispielsweise `https://example.com/`, oder
-- Unterpfad, beispielsweise `https://example.com/token-studio/`.
+Da die aktuelle App keine separaten Unterrouten nutzt, ist keine serverseitige SPA-Fallback-Konfiguration für `/learners` oder `/projects` erforderlich. Hash-Anker müssen unter dem Repository-Unterpfad weiterhin funktionieren.
 
-Bei Hosting unter einem Unterpfad MÜSSEN Vite `base`, interne Links und Asset-URLs diesen Pfad berücksichtigen. Da die aktuelle App keine separaten Unterrouten nutzt, ist keine serverseitige SPA-Fallback-Konfiguration für `/learners` oder `/projects` erforderlich.
+### 16.3 Automatisches Deployment
 
-### 16.3 Release-Checkliste
+Der Workflow `.github/workflows/deploy-pages.yml` MUSS bei relevanten Pushes auf `main`:
+
+1. den Repository-Inhalt auschecken,
+2. Node.js und den npm-Cache einrichten,
+3. in `token-studio/` mit `npm ci` installieren,
+4. mit `npm run build` das Artefakt erzeugen,
+5. `token-studio/dist` als Pages-Artefakt hochladen,
+6. das Artefakt in die Umgebung `github-pages` deployen.
+
+### 16.4 Release-Checkliste
 
 - [x] `npm ci` ist erfolgreich.
 - [x] `npm run lint` ist erfolgreich.
@@ -697,11 +706,10 @@ Eine Änderung gilt als abgeschlossen, wenn:
 
 ### Priorität 1: Produktionsfähigkeit
 
-1. Deployment-Strategie und Asset-Pfade festlegen.
+1. Den ersten GitHub-Pages-Workflow und die öffentliche URL prüfen.
 2. Alle internen Anker und Kontaktlinks prüfen.
 3. Zugängliche Labels und Fokuszustände ergänzen.
 4. Reale Projektinhalte von Platzhaltern unterscheiden.
-5. Nach Festlegung der öffentlichen URL die kanonische URL und absolute Social-Preview-URL ergänzen.
 
 ### Erledigte Codequalität
 
@@ -714,22 +722,19 @@ Eine Änderung gilt als abgeschlossen, wenn:
 
 1. Finale Mobile-, Tastatur- und Screenreader-Prüfung durchführen.
 2. Projektbilder künftig in WebP oder AVIF konvertieren.
-3. Hosting-Ziel und öffentliche URL festlegen.
-4. Deployment und Live-Abnahme durchführen.
+3. GitHub-Pages-Deployment und Live-Abnahme durchführen.
 
 ## 20. Offene Produktentscheidungen
 
-Vor größeren Änderungen sollten folgende Fragen beantwortet werden:
+Vor größeren Änderungen sollte folgende Frage beantwortet werden:
 
-1. Wird das Portfolio auf einer Root-Domain oder unter einem Unterpfad veröffentlicht?
-2. Welche öffentliche URL wird für kanonische und Open-Graph-Metadaten verwendet?
-3. Sind E-Mail und LinkedIn-Profil abschließend als öffentliche Kontaktdaten bestätigt?
+1. Sind E-Mail und LinkedIn-Profil abschließend als öffentliche Kontaktdaten bestätigt?
 
 ## 21. Bekannte Einschränkungen des aktuellen Stands
 
 - Die finale Mobile-, Tastatur- und Screenreader-Abnahme ist noch manuell durchzuführen.
 - Die PNG-Projektbilder sind noch nicht in moderne Bildformate konvertiert.
-- Hosting-Ziel, öffentliche URL und Deployment-Konfiguration sind noch offen.
+- Der erste GitHub-Pages-Lauf und die Live-Abnahme stehen noch aus.
 
 ## 22. Änderungsprotokoll
 
@@ -741,3 +746,4 @@ Vor größeren Änderungen sollten folgende Fragen beantwortet werden:
 | 1.3 | 22.07.2026 | Daten-/Komponenten-Refactor, Tests, Accessibility, SEO, Dependency-Cleanup und Audit-Abgleich |
 | 1.4 | 22.07.2026 | Aktueller Intro-Screen, gemeinsame Serif-/Sans-Typografie, animierte Polarlichtlinien auf beiden Ansichten, Scroll-Verstärkung und nahtloser Header-Hintergrund dokumentiert |
 | 1.5 | 24.07.2026 | Holo Mini mit Screenshot, Live- und GitHub-Link, aktuelle Selected-Work-Reihenfolge, neuer CV-Download, zehn erfolgreiche Tests, vollständige Browser-Viewport-Matrix, randloser Intro-Hintergrund, verfeinerte Namensanimation und nachgewiesene Release-Checks dokumentiert |
+| 1.6 | 24.07.2026 | GitHub Pages als Hosting-Ziel, `/Portfolio/` als Vite-Basispfad, öffentliche Canonical-/Social-URLs und automatisches GitHub-Actions-Deployment dokumentiert |

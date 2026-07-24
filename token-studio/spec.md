@@ -6,8 +6,8 @@
 | --- | --- |
 | Projektname | Razieh.dev |
 | Dokumenttyp | Produkt- und technische Spezifikation |
-| Version | 1.4 |
-| Stand | 22. Juli 2026 |
+| Version | 1.5 |
+| Stand | 24. Juli 2026 |
 | Status | Aktualisierte Beschreibung des implementierten Produkts mit Zielanforderungen für die Weiterentwicklung |
 | Primäre Sprache der Website | Englisch |
 | Zielplattform | Moderne Desktop-, Tablet- und Mobile-Browser |
@@ -166,11 +166,11 @@ Razieh.dev
 
 **FR-INTRO-03:** Direkte Abschnittslinks mit Hash MÜSSEN den Intro-Screen überspringen.
 
-**FR-INTRO-04:** „RAZIEH“ SOLL buchstabenweise von links und „DORRAZAEI“ buchstabenweise von rechts erscheinen. Bei reduzierter Bewegung MUSS der vollständige Name sofort sichtbar sein.
+**FR-INTRO-04:** „RAZIEH“ SOLL buchstabenweise von links und „DORRAZAEI“ buchstabenweise von rechts erscheinen. Die Buchstaben SOLLEN sich mit leichter räumlicher Drehung, sanftem Überschwingen und einem kurzen Leuchteffekt zusammensetzen. Danach SOLLEN Vor- und Nachname nacheinander einen langsamen, dezenten Shine-Puls erhalten. Eine dezente Farbverlaufslinie SOLL die Sequenz unter dem Namen abschließen. Bei reduzierter Bewegung MUSS der vollständige Name samt ruhiger Linie sofort sichtbar sein.
 
-**FR-INTRO-05:** Die Buchstaben SOLLEN nacheinander und bewusst langsam erscheinen. Ihre Farben SOLLEN von warmem Kupfer und Rosé über Violett zu leuchtendem Blau verlaufen.
+**FR-INTRO-05:** Die Buchstaben SOLLEN nacheinander, flüssig und in einem zügigen, weiterhin gut lesbaren Tempo erscheinen. Ihre Farben SOLLEN von warmem Kupfer und Rosé über Violett zu leuchtendem Blau verlaufen.
 
-**FR-INTRO-06:** Der Intro-Screen MUSS denselben textfreien Hintergrund wie die Hauptseite verwenden und SOLL ausschließlich dekorative Polarlichtlinien animieren. Die Code-Symbole des Hero-Bereichs DÜRFEN dort nicht erscheinen.
+**FR-INTRO-06:** Der Intro-Screen MUSS denselben textfreien Hintergrund wie die Hauptseite verwenden, den gesamten Viewport ohne schwarze Balken ausfüllen und SOLL ausschließlich dekorative Polarlichtlinien animieren. Die Code-Symbole des Hero-Bereichs DÜRFEN dort nicht erscheinen.
 
 **FR-INTRO-07:** Name, Rolle und Einstiegsschaltfläche MÜSSEN oberhalb der dekorativen Animation klar lesbar und bedienbar bleiben.
 
@@ -212,6 +212,8 @@ Razieh.dev
 
 **FR-HOME-08:** Bis zu vier hervorgehobene Projekte SOLLEN mit Titel, Stack, Kurzbeschreibung und Reihenfolge dargestellt werden.
 
+**FR-HOME-08A:** Die aktuelle „Selected Work“-Reihenfolge MUSS Lifestyle Quiz, Glowify, AutoFlow Workshop und zuletzt Holo Mini enthalten.
+
 **FR-HOME-09:** Projekte mit Bild MÜSSEN einen aussagekräftigen Alternativtext besitzen.
 
 **FR-HOME-10:** Live- und GitHub-Links DÜRFEN nur angezeigt werden, wenn eine gültige URL existiert.
@@ -242,17 +244,35 @@ Razieh.dev
 
 **FR-PROJ-06:** Wenn später viele Projekte vorhanden sind, KANN ein Filter ergänzt werden, solange die One-Page-Struktur erhalten bleibt.
 
+#### Aktueller Projektbestand
+
+Das vollständige Projektarchiv enthält derzeit:
+
+1. Lifestyle Quiz,
+2. Glowify,
+3. AutoFlow Workshop,
+4. Holo Mini,
+5. Raaji Baluch Blog.
+
+Holo Mini ist ein veröffentlichtes, responsives Smartwatch-Store-Demo auf Basis von HTML, CSS und JavaScript. Die Projektkarte MUSS den Screenshot `holomini-home.png`, einen aussagekräftigen Alternativtext sowie Links zur Live-Website und zum GitHub-Repository anzeigen. Raaji Baluch Blog bleibt im vollständigen Projektarchiv sichtbar, ist aber aktuell nicht als „Selected Work“ markiert.
+
 ### 7.4 Projektkarten
 
 Jedes Projekt MUSS mindestens folgende Daten unterstützen:
 
 ```ts
+type ProjectStatus = "published" | "github" | "learning";
+
 interface Project {
+  id: string;
   title: string;
   stack: string;
-  category: ProjectCategory;
+  category: "frontend" | "full stack";
+  status: ProjectStatus;
   text: string;
+  featured?: boolean;
   image?: string;
+  imageAlt?: string;
   liveUrl?: string;
   githubUrl?: string;
 }
@@ -288,7 +308,9 @@ interface Project {
 
 **FR-FOOT-05:** Das Copyright-Jahr SOLL automatisch erzeugt oder regelmäßig aktualisiert werden.
 
-**FR-FOOT-06:** Der Lebenslauf SOLL als klar benannter Download oder als Link verfügbar sein, sofern die PDF öffentlich angeboten werden soll.
+**FR-FOOT-06:** Der öffentlich freigegebene Lebenslauf MUSS im Footer als „Download CV“ heruntergeladen werden können.
+
+**FR-FOOT-07:** Der aktuelle Download MUSS die dreiseitige PDF `updated-CV.pdf` aus dem `public`-Verzeichnis ausliefern und den konfigurierten Vite-Basispfad berücksichtigen.
 
 ## 8. Design- und UI-Spezifikation
 
@@ -551,7 +573,7 @@ npm run lint
 npm run build
 ```
 
-Stand 22. Juli 2026 umfasst die automatisierte Suite fünf Testdateien mit acht erfolgreichen Tests. Darin sind auch der zugängliche Intro-Einstieg und das Überspringen des Intros bei direkten Hash-Aufrufen abgedeckt.
+Stand 24. Juli 2026 umfasst die automatisierte Suite fünf Testdateien mit zehn erfolgreichen Tests. Darin sind auch der zugängliche Intro-Einstieg, das Überspringen des Intros bei direkten Hash-Aufrufen, die Live- und GitHub-Links von Holo Mini sowie Holo Minis letzte Position unter „Selected Work“ abgedeckt.
 
 ### 15.2 Unit-Tests
 
@@ -559,7 +581,8 @@ Mindestens folgende Logik SOLL getestet werden:
 
 - Projektkarten rendern optionale Live- und GitHub-Links korrekt,
 - Projektkarten ohne Links zeigen keine leeren Aktionen,
-- zentrale Projektdaten werden vollständig dargestellt.
+- zentrale Projektdaten werden vollständig dargestellt,
+- die Holo-Mini-Karte verweist auf die korrekte Live-Website und das korrekte GitHub-Repository.
 
 ### 15.3 Komponenten- und Integrationstests
 
@@ -618,17 +641,19 @@ Bei Hosting unter einem Unterpfad MÜSSEN Vite `base`, interne Links und Asset-U
 
 ### 16.3 Release-Checkliste
 
-- [ ] `npm ci` ist erfolgreich.
-- [ ] `npm run lint` ist erfolgreich.
-- [ ] Automatisierte Tests sind erfolgreich.
-- [ ] `npm run build` ist erfolgreich.
-- [ ] Die Startseite ist direkt aufrufbar.
-- [ ] Alle internen Ankerlinks springen zu vorhandenen Bereichen.
-- [ ] Projekt- und Kontaktlinks wurden geprüft.
-- [ ] Mobile Darstellung wurde geprüft.
+- [x] `npm ci` ist erfolgreich.
+- [x] `npm run lint` ist erfolgreich.
+- [x] Automatisierte Tests sind erfolgreich.
+- [x] `npm run build` ist erfolgreich.
+- [x] Die Startseite ist direkt aufrufbar.
+- [x] Alle internen Ankerlinks springen zu vorhandenen Bereichen.
+- [x] Alle Projekt- und GitHub-Links wurden mit HTTP 200 geprüft.
+- [ ] E-Mail und LinkedIn wurden persönlich geprüft.
+- [x] Mobile Darstellung wurde in der lokalen Chrome-Produktionsvorschau geprüft.
 - [ ] Tastaturbedienung wurde geprüft.
-- [ ] Metadaten und Favicon sind vorhanden.
-- [ ] Öffentliche Kontaktdaten und PDF wurden bewusst freigegeben.
+- [x] Metadaten und Favicon sind vorhanden.
+- [x] Die aktuelle CV-PDF wurde bewusst öffentlich freigegeben.
+- [ ] E-Mail und LinkedIn wurden abschließend als öffentliche Kontaktdaten bestätigt.
 
 ## 17. Definition of Done
 
@@ -648,18 +673,19 @@ Eine Änderung gilt als abgeschlossen, wenn:
 
 - [x] Ein zugänglicher Intro-Screen führt in das Portfolio und direkte Hash-Links überspringen ihn.
 - [x] Intro und Hauptseite verwenden eine gemeinsame Farbwelt und animierte Polarlichtlinien.
-- [ ] Besucher verstehen im ersten sichtbaren Bereich Slogan, Rolle und Schwerpunkt.
-- [ ] Home, Projects und Contact sind zuverlässig per Anker erreichbar.
-- [ ] Browsernavigation und direkter Reload der Startseite funktionieren.
-- [ ] Reale Projekte besitzen funktionierende Live- und/oder GitHub-Links.
+- [x] Besucher verstehen im ersten sichtbaren Bereich Slogan, Rolle und Schwerpunkt.
+- [x] Home, Projects und Contact sind zuverlässig per Anker erreichbar.
+- [x] Direkter Reload der Startseite und direkte Hash-Aufrufe funktionieren.
+- [ ] Browser-Zurück und Browser-Vorwärts wurden manuell bestätigt.
+- [x] Reale Projekte besitzen funktionierende Live- und/oder GitHub-Links.
 - [ ] Kontaktmöglichkeiten sind vollständig und erreichbar.
-- [ ] Der Lebenslauf ist verfügbar, sofern er Teil des gewünschten Portfolios ist.
+- [x] Der Lebenslauf ist über „Download CV“ als aktuelle PDF verfügbar.
 
 ### Qualität
 
 - [x] Es gibt keine TypeScript- oder ESLint-Fehler.
 - [x] Kernfunktionen besitzen automatisierte Tests.
-- [ ] Alle Ziel-Viewports funktionieren ohne horizontales Scrollen.
+- [x] Alle Ziel-Viewports funktionieren ohne horizontales Scrollen.
 - [x] Reduzierte Bewegung wird respektiert.
 - [x] Header und Footer verwenden dasselbe Schrift-System wie der Hauptinhalt.
 - [x] Unbenutzte Produktionsabhängigkeiten wurden entfernt.
@@ -714,3 +740,4 @@ Vor größeren Änderungen sollten folgende Fragen beantwortet werden:
 | 1.2 | 16.07.2026 | Aktualisierung auf aktuellen Hero-Slogan, Reflexionshintergrund, README und AGENTS.md |
 | 1.3 | 22.07.2026 | Daten-/Komponenten-Refactor, Tests, Accessibility, SEO, Dependency-Cleanup und Audit-Abgleich |
 | 1.4 | 22.07.2026 | Aktueller Intro-Screen, gemeinsame Serif-/Sans-Typografie, animierte Polarlichtlinien auf beiden Ansichten, Scroll-Verstärkung und nahtloser Header-Hintergrund dokumentiert |
+| 1.5 | 24.07.2026 | Holo Mini mit Screenshot, Live- und GitHub-Link, aktuelle Selected-Work-Reihenfolge, neuer CV-Download, zehn erfolgreiche Tests, vollständige Browser-Viewport-Matrix, randloser Intro-Hintergrund, verfeinerte Namensanimation und nachgewiesene Release-Checks dokumentiert |

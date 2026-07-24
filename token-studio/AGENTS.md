@@ -17,13 +17,17 @@ Dieses Projekt ist ein persönliches One-Page-Portfolio mit:
 Der aktuelle Produktstand umfasst:
 
 - einen bildschirmfüllenden Intro-Screen vor dem eigentlichen Portfolio
-- eine buchstabenweise Namensanimation von links und rechts
+- eine flüssige, zügige Namensanimation von links und rechts mit räumlicher Drehung, kurzem Leuchteffekt, Shine-Puls und abschließender Lichtlinie
 - einen gemeinsamen dunklen Hintergrund mit Kupfer-, Rosé-, Violett- und Blautönen
 - animierte SVG-Polarlichtlinien auf Intro und Hauptseite
 - einen Scroll-Effekt, der die Lichtlinien der Hauptseite kurz verstärkt
 - eine Serifenschrift für Namen und Überschriften sowie Sans-Serif für Fließtext und UI
 - eine One-Page-Hauptansicht mit Header, Hero, Arbeiten, About, Highlights, Prozess, Projekten und Footer
 - Hash-Links, die den Intro-Screen überspringen und direkt zum gewünschten Abschnitt führen
+- vier hervorgehobene Arbeiten, wobei Holo Mini den letzten Platz unter „Selected Work“ einnimmt
+- ein vollständiges Projektarchiv mit Lifestyle Quiz, Glowify, AutoFlow Workshop, Holo Mini und Raaji Baluch Blog
+- Holo Mini mit eigenem Screenshot sowie funktionierendem Live- und GitHub-Link
+- einen öffentlich freigegebenen, dreiseitigen Lebenslauf über „Download CV“
 
 Wichtig: Der Anwendungscode wird in TypeScript geschrieben. Neue React-Dateien sollen `.tsx` verwenden, reine Hilfsdateien sollen `.ts` verwenden. Für App-Code sollen keine neuen `.js`- oder `.jsx`-Dateien angelegt werden.
 
@@ -273,6 +277,7 @@ interface Project {
 - Vermeide unnötige Animationen.
 - Nutze für neue dekorative Bewegung keine zusätzliche Animationsbibliothek.
 - Erhalte die gemeinsame Hintergrundsprache aus Kupfer, Rosé, Violett und Blau.
+- Der Intro-Hintergrund soll den gesamten Viewport ohne schwarze Balken ausfüllen.
 - Intro und Hauptseite dürfen dieselbe `BackgroundLightTrails`-Komponente verwenden.
 - Der Header soll visuell in den Hintergrund übergehen und keine undurchsichtige Fremdfläche bilden.
 - Scroll-Verstärkung und Daueranimationen müssen `prefers-reduced-motion` respektieren.
@@ -311,6 +316,9 @@ Externe Links:
 Die aktuelle Struktur ist bereits nach Verantwortungsbereichen getrennt:
 
 ```text
+public/
+├── holomini-home.png
+└── updated-CV.pdf
 src/
 ├── components/
 │   ├── layout/

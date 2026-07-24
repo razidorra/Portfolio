@@ -1,6 +1,6 @@
 # Audit und Umsetzungsstand: Razieh.dev One-Page-Portfolio
 
-Stand: 22. Juli 2026
+Stand: 24. Juli 2026
 
 ## Status-Legende
 
@@ -14,7 +14,8 @@ Die lokale Anwendung ist strukturiert, getestet und produktionsfähig buildbar. 
 
 Aktuell bestätigt:
 
-- [x] `npm test`: 5 Testdateien, 7 Tests erfolgreich
+- [x] `npm ci`: Lockfile-Installation erfolgreich
+- [x] `npm test`: 5 Testdateien, 10 Tests erfolgreich
 - [x] `npm run lint`: erfolgreich
 - [x] `npm run build`: erfolgreich
 - [x] `npm audit`: 0 bekannte Schwachstellen
@@ -34,14 +35,14 @@ Ziel: Die Seite ist inhaltlich klar, ehrlich und professionell.
 - [ ] Kontakt-E-Mail durch die Eigentümerin persönlich bestätigen.
 - [ ] LinkedIn-Profil im normalen Browser persönlich öffnen; automatisierte Anfrage wird von LinkedIn mit Status 999 blockiert.
 - [x] GitHub-Profil automatisiert mit HTTP 200 geprüft.
-- [x] Vorhandene CV-PDF ist als „Download CV“ sichtbar eingebunden.
+- [x] Die aktuelle dreiseitige CV-PDF ist als „Download CV“ sichtbar eingebunden und im Produktions-Build enthalten.
 - [x] Das Social-Preview-Bild dient als zugänglicher, per Maus und Tastatur bedienbarer Intro-Screen.
 - [x] Direkte Abschnittslinks überspringen den Intro-Screen.
 
 Abnahme:
 
 - [x] Name, Rolle und Schwerpunkt sind im ersten sichtbaren Bereich vorhanden.
-- [x] Lernprojekte sind nicht als veröffentlichte Produkte formuliert.
+- [x] Das frühere unveröffentlichte Lernprojekt wurde durch das reale, veröffentlichte Holo-Mini-Projekt ersetzt.
 - [ ] E-Mail und LinkedIn abschließend persönlich bestätigen.
 
 ## Phase 2: Projekte bereinigen
@@ -53,8 +54,12 @@ Ziel: Jede Projektkarte beschreibt ihren tatsächlichen Status.
 - [x] Lifestyle Quiz Live- und GitHub-Link: HTTP 200.
 - [x] Glowify Live- und GitHub-Link: HTTP 200.
 - [x] AutoFlow Live- und GitHub-Link: HTTP 200.
+- [x] Holo Mini Live- und GitHub-Link: HTTP 200.
 - [x] Raaji Baluch Blog GitHub-Link: HTTP 200.
-- [x] Full Stack Practice App ist ausdrücklich als unveröffentlichtes Lernprojekt gekennzeichnet.
+- [x] Die frühere Full Stack Practice App wurde vollständig durch Holo Mini ersetzt.
+- [x] Holo Mini verwendet den neuen Screenshot `public/holomini-home.png` mit konkretem Alt-Text.
+- [x] Holo Mini ist die letzte der vier über `featured` hervorgehobenen Arbeiten.
+- [x] Raaji Baluch Blog bleibt im vollständigen Projektarchiv und ist als Source-only-Projekt erkennbar.
 - [x] „Responsive Portfolio“ ist nicht im aktuellen Datenbestand; alter Audit-Punkt ist nicht anwendbar.
 - [x] „Dashboard Cards“ ist nicht im aktuellen Datenbestand; alter Audit-Punkt ist nicht anwendbar.
 - [x] Vorhandene Screenshots sind eingebunden.
@@ -64,7 +69,7 @@ Ziel: Jede Projektkarte beschreibt ihren tatsächlichen Status.
 
 Abnahme:
 
-- [x] Jede Karte ist als veröffentlicht, Source-only oder Lernprojekt erkennbar.
+- [x] Jede aktuelle Karte ist als veröffentlicht oder Source-only erkennbar.
 - [x] Alle eingetragenen Projektlinks antworteten bei der Prüfung mit HTTP 200.
 - [x] Mehrere echte Projekte sind prominent sichtbar.
 
@@ -102,16 +107,18 @@ Ziel: Styling ist robust, zugänglich und ohne tote Regeln.
 - [x] Links und Buttons besitzen sichtbare `:focus-visible`-Styles.
 - [x] Wichtige Links und Buttons besitzen mindestens 44 px Höhe.
 - [x] `prefers-reduced-motion: reduce` deaktiviert praktisch alle Animationen und Smooth Scrolling.
+- [x] Intro-Hintergrund füllt Mobile- und Desktop-Viewports mit `object-fit: cover` ohne schwarze Balken.
+- [x] Namensbuchstaben animieren in einem flüssigen, zügigen Tempo mit räumlicher Drehung, sanftem Überschwingen und kurzem Leuchteffekt; danach erhalten Vor- und Nachname nacheinander einen dezenten Shine-Puls.
 - [x] Browser-Layout bei 320, 375, 768, 1024 und 1440 CSS-Pixeln ohne horizontale Überbreite geprüft.
 - [x] Hero bei 768, 1024 und 1440 px visuell geprüft.
-- [ ] 320 und 375 px zusätzlich in einem normalen Browser oder auf einem Mobilgerät visuell prüfen.
-- [ ] Ganze Seite bei allen Viewports bis zum Footer visuell prüfen; die bisherigen Screenshots decken den ersten Viewport ab.
+- [x] 320 und 375 px in der lokalen Chrome-Produktionsvorschau vollständig visuell geprüft.
+- [x] Ganze Seite bei 320, 375, 768, 1024 und 1440 px bis zum Footer visuell geprüft.
 
 Abnahme:
 
 - [x] Keine offensichtlich ungenutzten CSS-Blöcke gefunden.
 - [x] Technische Viewport-Matrix 320, 375, 768, 1024 und 1440 ohne horizontales Überlaufen bestätigt.
-- [ ] Vollständige visuelle Matrix manuell abschließen.
+- [x] Vollständige Browser-Viewport-Matrix ohne horizontales Überlaufen abgeschlossen.
 - [x] CSS enthält Schutz für lange Links und schmale Karten.
 
 ## Phase 5: Alte Dateien und Dependencies
@@ -166,7 +173,7 @@ Ziel: Professionelle Browser- und Social-Darstellung.
 - [x] Open-Graph-Titel, Description, Bildabmessungen und Alt-Text ergänzt.
 - [x] Twitter Large Image Card ergänzt.
 - [x] Eigenes Social-Preview-Bild unter `public/social-preview.png` erstellt.
-- [x] README vollständig auf den aktuellen Projektstand aktualisiert.
+- [x] README auf Holo Mini, den aktuellen Projektbestand, die Selected-Work-Reihenfolge und die neue CV aktualisiert.
 - [x] Screenshot/Social Preview, Installation, Scripts, Struktur und Deployment-Hinweise dokumentiert.
 - [ ] Nach Festlegung der Live-Domain absolute `og:url` und kanonische URL ergänzen.
 - [ ] GitHub-Repository-Beschreibung außerhalb des Codes aktualisieren.
@@ -188,6 +195,7 @@ Ziel: Zentrale Portfolio-Funktionen sind regressionssicher.
 - [x] Header-Anker werden getestet.
 - [x] Projektkarten mit und ohne Links werden getestet.
 - [x] Die vollständige zentrale Projektliste wird getestet.
+- [x] Holo Minis Live- und GitHub-Ziel werden explizit getestet.
 - [x] Footer-Kontakte und CV-Download werden getestet.
 - [x] Direkte Ankeraufrufe nach dem React-Render werden getestet.
 - [x] `npm test`, Lint und Build erfolgreich.
@@ -195,7 +203,7 @@ Ziel: Zentrale Portfolio-Funktionen sind regressionssicher.
 
 Abnahme:
 
-- [x] 5 Testdateien und 7 Tests laufen erfolgreich.
+- [x] 5 Testdateien und 10 Tests laufen erfolgreich.
 - [x] Navigation, Projektaktionen, Projektliste und Kontakte sind abgedeckt.
 
 ## Phase 9: Deployment vorbereiten
@@ -209,6 +217,7 @@ Ziel: Die Seite kann auf dem gewählten Host veröffentlicht werden.
 - [x] Favicon und Social Preview verwenden Vites `%BASE_URL%`.
 - [x] Produktions-Build erfolgreich.
 - [x] Produktions-Preview startet lokal.
+- [x] Root-Aufruf, direkter Hash-Aufruf, Holo-Mini-Bild und CV antworten in der Produktionsvorschau mit HTTP 200.
 - [x] Projekt- und GitHub-Links im Preview-Datenstand geprüft.
 - [ ] Mobile Preview auf echtem Gerät prüfen.
 - [ ] Deployment durchführen.
@@ -226,7 +235,7 @@ Abnahme:
 - [x] `npm run build` erfolgreich.
 - [x] `npm test` erfolgreich.
 - [x] Alle eingetragenen Projekt- und GitHub-Links antworten mit HTTP 200.
-- [x] Lernprojekt ist klar gekennzeichnet; keine irreführenden leeren Buttons.
+- [x] Es gibt kein Platzhalter- oder unveröffentlichtes Lernprojekt mehr; optionale Aktionen erzeugen weiterhin keine leeren Buttons.
 - [x] Keine sichtbaren Learners- oder Token-Studio-Seiten.
 - [x] Keine unnötigen Produktionsabhängigkeiten.
 - [x] README und AUDIT entsprechen dem aktuellen Code.
@@ -248,9 +257,9 @@ Abnahme:
 
 ## Nächster manueller Schritt
 
-1. Seite mit `npm run dev` öffnen.
-2. E-Mail und LinkedIn-Link persönlich bestätigen.
-3. Bei 320 und 375 px die gesamte Seite bis zum Footer prüfen.
-4. Alle Links und den Skip-Link ausschließlich per Tastatur bedienen.
+1. E-Mail und LinkedIn-Link persönlich bestätigen.
+2. Alle Links und den Skip-Link ausschließlich per Tastatur bedienen.
+3. Einen kurzen Screenreader-Smoke-Test durchführen.
+4. Die Seite auf einem echten Mobilgerät prüfen.
 5. Hosting-Ziel und öffentliche URL festlegen.
 6. Danach deployen und die letzten offenen Häkchen in diesem Dokument abschließen.

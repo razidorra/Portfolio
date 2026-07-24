@@ -42,7 +42,7 @@ function AnimatedWord({
         <span
           className="intro-name__letter"
           style={{
-            animationDelay: `${startDelay + index * 0.22}s`,
+            animationDelay: `${startDelay + index * 0.17}s`,
             color: backgroundLightColors[paletteOffset + index],
           }}
           aria-hidden="true"
@@ -75,7 +75,7 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
           <AnimatedWord from="left" paletteOffset={0} startDelay={0.15}>
             RAZIEH
           </AnimatedWord>
-          <AnimatedWord from="right" paletteOffset={6} startDelay={2.1}>
+          <AnimatedWord from="right" paletteOffset={6} startDelay={1.55}>
             DORRAZAEI
           </AnimatedWord>
         </span>

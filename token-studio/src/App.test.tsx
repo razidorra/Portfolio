@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import App from "./App";
 
@@ -45,5 +45,17 @@ describe("App", () => {
     render(<App />);
 
     expect(scrollIntoView).toHaveBeenCalledOnce();
+  });
+
+  it("renders Holo Mini as the final selected work", () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: /enter razieh/i }));
+
+    const selectedWorkSection = screen.getByRole("heading", { name: "Selected Work" }).closest("section");
+
+    expect(selectedWorkSection).not.toBeNull();
+    expect(
+      within(selectedWorkSection!).getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent),
+    ).toEqual(["Lifestyle Quiz", "Glowify", "AutoFlow Workshop", "Holo Mini"]);
   });
 });

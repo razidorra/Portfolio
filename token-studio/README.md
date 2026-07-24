@@ -8,10 +8,12 @@ An accessible, responsive one-page portfolio for frontend developer Razieh Dorra
 
 - responsive one-page layout
 - click-to-enter intro screen with direct-link bypass
-- staggered first-name and surname entrance animation
+- smooth, brisk first-name and surname entrance with 3D settling and a subtle shine
 - matching text-free cinematic background derived from the intro artwork
-- selected work and complete project archive
-- explicit labels for published, source-only, and learning projects
+- four selected works with Holo Mini in the final position
+- complete five-project archive with explicit published and source-only labels
+- Holo Mini screenshot with direct live and GitHub links
+- downloadable three-page CV
 - keyboard-visible focus states and skip navigation
 - reduced-motion support
 - responsive public asset paths for root or subpath deployment
@@ -60,6 +62,9 @@ npm run preview
 ## Project structure
 
 ```text
+public/
+├── holomini-home.png
+└── updated-CV.pdf
 src/
 ├── components/
 │   ├── layout/
@@ -78,11 +83,9 @@ Portfolio content is maintained in `src/data`. Page sections receive this data t
 
 ## Projects
 
-The project archive currently distinguishes between:
+The selected work section currently presents Lifestyle Quiz, Glowify, AutoFlow Workshop, and Holo Mini in that order. The complete archive also includes the GitHub-only Raaji Baluch Blog project.
 
-- published projects with live and source links
-- GitHub-only projects
-- ongoing learning projects without misleading action buttons
+Published projects expose their live website and source repository. Source-only projects show a GitHub action without an empty or misleading live button.
 
 Add or update projects in `src/data/projects.ts`. Optional images belong in `public/` and need a meaningful `imageAlt` value.
 

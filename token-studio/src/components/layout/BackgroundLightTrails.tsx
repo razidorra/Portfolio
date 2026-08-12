@@ -47,28 +47,15 @@ export default function BackgroundLightTrails() {
           <stop offset="0.7" stopColor="#9b63ff" />
           <stop offset="1" stopColor="#4768ff" />
         </linearGradient>
-        <filter id="trail-glow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="7" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
         <filter id="aurora-glow" x="-50%" y="-80%" width="200%" height="260%">
           <feGaussianBlur stdDeviation="18" />
         </filter>
       </defs>
 
-      {[upperPath, lowerPath, lowerPathTwo].map((path, index) => (
-        <g key={path} className={`light-trail light-trail--${index + 1}`}>
-          <path className="light-trail__aurora" d={path} pathLength="100" />
-          <path className="light-trail__base" d={path} pathLength="100" />
-          <path
-            className="light-trail__pulse light-trail__pulse--soft"
-            d={path}
-            pathLength="100"
-          />
-          <path className="light-trail__pulse" d={path} pathLength="100" />
+      {[upperPath, lowerPath, lowerPathTwo].map((path) => (
+        <g key={path}>
+          <path className="light-trail__aurora" d={path} />
+          <path className="light-trail__base" d={path} />
         </g>
       ))}
     </svg>

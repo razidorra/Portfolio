@@ -1,4 +1,5 @@
 import type { Project } from "../data/projects";
+import ScreenshotFrame from "../components/projects/ScreenshotFrame";
 
 interface WorksSectionProps {
   projects: Project[];
@@ -13,17 +14,25 @@ export default function WorksSection({ projects }: WorksSectionProps) {
       <div className="work-stack">
         {projects.map((project) => (
           <article className="work-feature" key={project.id}>
-            <div className="work-media">
+            <ScreenshotFrame className="work-media">
               {project.image && project.imageAlt ? (
                 <img src={publicAsset(project.image)} alt={project.imageAlt} loading="lazy" decoding="async" />
               ) : (
                 <span aria-hidden="true">{project.title.slice(0, 2)}</span>
               )}
-            </div>
+            </ScreenshotFrame>
             <div className="work-copy">
-              <p>{project.stack}</p>
+              {project.caseStudy ? <p className="work-label">Flagship case study</p> : null}
+              <p className="work-stack-label">{project.stack}</p>
               <h3>{project.title}</h3>
-              <p>{project.text}</p>
+              <p className="work-description">{project.text}</p>
+              {project.caseStudy ? (
+                <dl className="case-study">
+                  <div><dt>Problem</dt><dd>{project.caseStudy.problem}</dd></div>
+                  <div><dt>Approach</dt><dd>{project.caseStudy.approach}</dd></div>
+                  <div><dt>Result</dt><dd>{project.caseStudy.result}</dd></div>
+                </dl>
+              ) : null}
               <div className="work-links">
                 {project.liveUrl ? (
                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">View Project</a>

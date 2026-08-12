@@ -47,7 +47,7 @@ describe("App", () => {
     expect(scrollIntoView).toHaveBeenCalledOnce();
   });
 
-  it("renders Holo Mini as the final selected work", () => {
+  it("leads selected work with the full-stack flagship project", () => {
     render(<App />);
     fireEvent.click(screen.getByRole("button", { name: /enter razieh/i }));
 
@@ -56,6 +56,6 @@ describe("App", () => {
     expect(selectedWorkSection).not.toBeNull();
     expect(
       within(selectedWorkSection!).getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent),
-    ).toEqual(["Lifestyle Quiz", "Glowify", "AutoFlow Workshop", "Holo Mini"]);
+    ).toEqual(["Raaji Baluch Blog", "Holo Mini", "Lifestyle Quiz"]);
   });
 });

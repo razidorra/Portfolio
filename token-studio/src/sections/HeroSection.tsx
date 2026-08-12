@@ -22,8 +22,9 @@ export default function HeroSection() {
           <span>for the Web</span>
         </h1>
         <p className="hero-text">
-          I build warm, accessible, and responsive web experiences with React,
-          TypeScript, and a growing full-stack toolkit.
+          I build warm, accessible, and responsive web experiences with React
+          and TypeScript—this portfolio included—while growing a practical
+          full-stack toolkit.
         </p>
 
         <div className="hero-actions" aria-label="Primary actions">

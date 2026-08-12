@@ -19,6 +19,7 @@ import PortfolioHighlightsSection from "./sections/PortfolioHighlightsSection";
 import ProcessSection from "./sections/ProcessSection";
 import ProjectsSection from "./sections/ProjectsSection";
 import WorksSection from "./sections/WorksSection";
+import MomentumSection from "./sections/MomentumSection";
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(() => !window.location.hash);
@@ -61,6 +62,7 @@ export default function App() {
         <HeroSection />
         <WorksSection projects={featuredProjects} />
         <AboutSection skills={skills} strengths={strengths} />
+        <MomentumSection />
         <PortfolioHighlightsSection stats={portfolioStats} />
         <ProcessSection steps={processSteps} />
         <ProjectsSection projects={projects} />

@@ -27,4 +27,16 @@ describe("ProjectsSection", () => {
       "https://github.com/razidorra/holomini",
     );
   });
+
+  it("separates applied projects from foundation work", () => {
+    render(<ProjectsSection projects={projects} />);
+
+    const appliedGroup = screen.getByRole("heading", { name: "Applied Projects" }).closest<HTMLElement>("div.project-group");
+    const foundationsGroup = screen.getByRole("heading", { name: "Foundations" }).closest<HTMLElement>("div.project-group");
+
+    expect(appliedGroup).not.toBeNull();
+    expect(foundationsGroup).not.toBeNull();
+    expect(within(appliedGroup!).getByRole("heading", { name: "Raaji Baluch Blog" })).toBeInTheDocument();
+    expect(within(foundationsGroup!).getByRole("heading", { name: "Glowify" })).toBeInTheDocument();
+  });
 });

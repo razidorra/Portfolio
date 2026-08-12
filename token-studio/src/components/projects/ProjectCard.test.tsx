@@ -9,6 +9,7 @@ const publishedProject: Project = {
   stack: "React",
   category: "frontend",
   status: "published",
+  group: "applied",
   text: "A published project.",
   liveUrl: "https://example.com",
   githubUrl: "https://github.com/example/project",
@@ -20,6 +21,7 @@ const learningProject: Project = {
   stack: "Node.js",
   category: "full stack",
   status: "learning",
+  group: "applied",
   text: "An unpublished learning project.",
 };
 

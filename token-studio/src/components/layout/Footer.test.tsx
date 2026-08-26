@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { contactLinks, coreSkills } from "../../data/portfolio";
+import { contactLinks } from "../../data/portfolio";
 import Footer from "./Footer";
 
 describe("Footer", () => {
   it("renders all contact links and the CV download", () => {
-    render(<Footer contactLinks={contactLinks} coreSkills={coreSkills} />);
+    render(<Footer contactLinks={contactLinks} />);
 
     contactLinks.forEach((contact) => {
       expect(screen.getByRole("link", { name: contact.label })).toHaveAttribute("href", contact.href);

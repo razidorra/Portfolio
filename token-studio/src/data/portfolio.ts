@@ -64,13 +64,6 @@ export const processSteps: TextItem[] = [
   },
 ];
 
-export const coreSkills = [
-  "React & TypeScript",
-  "Responsive Design",
-  "Accessible UI",
-  "Node.js Fundamentals",
-];
-
 export const contactLinks: ContactLink[] = [
   {
     label: "dorra.razi@gmail.com",

@@ -4,7 +4,6 @@ import type { ContactLink } from "../../data/portfolio";
 
 interface FooterProps {
   contactLinks: ContactLink[];
-  coreSkills: string[];
 }
 
 const icons: Record<ContactLink["icon"], ComponentType<{ "aria-hidden": true; size: number; strokeWidth: number }>> = {
@@ -14,22 +13,11 @@ const icons: Record<ContactLink["icon"], ComponentType<{ "aria-hidden": true; si
   document: FileDown,
 };
 
-export default function Footer({ contactLinks, coreSkills }: FooterProps) {
+export default function Footer({ contactLinks }: FooterProps) {
   return (
     <footer className="site-footer">
       <section className="footer-connect" id="connect" aria-labelledby="contact-heading">
         <div className="footer-connect__inner">
-          <div className="footer-skills">
-            <h2>Core Skills</h2>
-            <p>
-              The tools and practices I use to turn ideas into clear,
-              maintainable web experiences.
-            </p>
-            <ul aria-label="Core skills">
-              {coreSkills.map((skill) => <li key={skill}>{skill}</li>)}
-            </ul>
-          </div>
-
           <div className="footer-card">
             <h2 id="contact-heading">Let&apos;s Connect</h2>
             <ul aria-label="Contact links">

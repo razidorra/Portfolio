@@ -1,4 +1,5 @@
 import { projectStatusLabels, type Project } from "../../data/projects";
+import { useRevealOnScroll } from "../../hooks/useRevealOnScroll";
 import ScreenshotFrame from "./ScreenshotFrame";
 
 interface ProjectCardProps {
@@ -8,10 +9,17 @@ interface ProjectCardProps {
 const publicAsset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const className = project.image ? "project-card project-card--media" : "project-card";
+  const { ref, visible } = useRevealOnScroll<HTMLElement>();
+  const className = [
+    "project-card",
+    project.image ? "project-card--media" : "",
+    visible ? "is-visible" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <article className={className}>
+    <article ref={ref} className={className}>
       {project.image && project.imageAlt ? (
         <ScreenshotFrame className="project-card__frame">
           {project.liveUrl ? (

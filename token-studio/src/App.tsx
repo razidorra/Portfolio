@@ -1,19 +1,21 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import "./App.css";
+import AmbientBackground from "./components/layout/AmbientBackground";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import IntroScreen from "./components/layout/IntroScreen";
-import BackgroundLightTrails from "./components/layout/BackgroundLightTrails";
+import MouseColorTrail from "./components/layout/MouseColorTrail";
+import Reveal from "./components/layout/Reveal";
 import { projects } from "./data/projects";
 import {
   contactLinks,
-  coreSkills,
   portfolioStats,
   processSteps,
   skills,
   strengths,
 } from "./data/portfolio";
 import AboutSection from "./sections/AboutSection";
+import CoreTechnologiesSection from "./sections/CoreTechnologiesSection";
 import HeroSection from "./sections/HeroSection";
 import PortfolioHighlightsSection from "./sections/PortfolioHighlightsSection";
 import ProcessSection from "./sections/ProcessSection";
@@ -52,7 +54,8 @@ export default function App() {
 
   return (
     <div className="site-shell">
-      <BackgroundLightTrails />
+      <AmbientBackground />
+      <MouseColorTrail />
       <a className="skip-link" href="#main-content">
         Skip to main content
       </a>
@@ -60,15 +63,30 @@ export default function App() {
 
       <main id="main-content" tabIndex={-1}>
         <HeroSection />
-        <WorksSection projects={featuredProjects} />
-        <AboutSection skills={skills} strengths={strengths} />
-        <MomentumSection />
-        <PortfolioHighlightsSection stats={portfolioStats} />
-        <ProcessSection steps={processSteps} />
-        <ProjectsSection projects={projects} />
+        <Reveal>
+          <CoreTechnologiesSection />
+        </Reveal>
+        <Reveal>
+          <WorksSection projects={featuredProjects} />
+        </Reveal>
+        <Reveal>
+          <AboutSection skills={skills} strengths={strengths} />
+        </Reveal>
+        <Reveal>
+          <MomentumSection />
+        </Reveal>
+        <Reveal>
+          <PortfolioHighlightsSection stats={portfolioStats} />
+        </Reveal>
+        <Reveal>
+          <ProcessSection steps={processSteps} />
+        </Reveal>
+        <Reveal>
+          <ProjectsSection projects={projects} />
+        </Reveal>
       </main>
 
-      <Footer contactLinks={contactLinks} coreSkills={coreSkills} />
+      <Footer contactLinks={contactLinks} />
     </div>
   );
 }
